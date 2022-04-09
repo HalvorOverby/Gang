@@ -24,7 +24,7 @@ def ui(overskrift: str, underskrifter:list,startTid: datetime.datetime,vær: str
 
     
     display_surface = pygame.display.set_mode((X, Y))
-    tittelfont = pygame.font.SysFont("poppinsmedium", largeFontSize)
+    tittelfont = pygame.font.SysFont("poppins", largeFontSize)
     underoverskriftfont= pygame.font.SysFont("poppinsextralight",smallFontSize)
     
     tittel = tittelfont.render(overskrift, True, black, offwhite)
