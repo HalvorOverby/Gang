@@ -24,6 +24,7 @@ while True:
     for device in currently_visiting.copy():
         if device not in [d[0] for d in nearby_devices]:
             currently_visiting.remove(device)
+            name = devices[device[0]]["name"]
             engine.say(f"Goodbye, {name}")
     engine.runAndWait()
     print("Current visitors:")
