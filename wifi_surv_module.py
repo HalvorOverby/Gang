@@ -23,13 +23,13 @@ except:
 
 def welcome_message(mac):
     if entries[mac]['name']:
-        os.system(f"""festival -b '(voice_cmu_us_slt_arctic_hts)' \
-        '(SayText "Welcome, {entries[mac]['name']}")'""")
+        subprocess.Popen(['festival', '-b', "'(voice_cmu_us_slt_arctic_hts)'", "\\", 
+        f"""'(SayText "Welcome, {entries[mac]['name']} I am hoping you have a good time.")'"""])
 
 def goodbye_message(mac):
     if entries[mac]['name']:
-        os.system(f"""festival -b '(voice_cmu_us_slt_arctic_hts)' \
-        '(SayText "Goodbye, {entries[mac]['name']}")'""")
+        subprocess.Popen(['festival', '-b', "'(voice_cmu_us_slt_arctic_hts)'", "\\", 
+        f"""'(SayText "Goodbye, {entries[mac]['name']}. Sure hope to see you again.")'"""])
 
 
 def update_macs():
