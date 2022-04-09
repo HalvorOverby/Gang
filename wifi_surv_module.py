@@ -29,7 +29,7 @@ def welcome_message(mac):
 def goodbye_message(mac):
     if entries[mac]['name']:
         subprocess.Popen(['festival', '-b', "'(voice_cmu_us_slt_arctic_hts)'", "\\", 
-        f"""'(SayText "Goodbye, {entries[mac]['name']}. Sure hope to see you again.")'"""])
+        "'(SayText" "Goodbye", entries[mac]['name']], ")'")
 
 
 def update_macs():
