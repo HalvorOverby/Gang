@@ -1,5 +1,7 @@
 import datetime
 import pygame
+
+
 pygame.init()
 def ui(overskrift: str, underskrift:str,startTid: datetime.datetime,vær: str):
     white = (255, 255, 255)
