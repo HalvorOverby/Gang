@@ -23,12 +23,12 @@ except:
 
 def welcome_message(mac):
     if entries[mac]['name']:
-        command = ["festival", "--tts", f"Welcome, {entries[mac]['name']}"]
+        command = ["festival", "--b", f"""'(SayText "Welcome, {entries[mac]['name']})'"""]
         subprocess.Popen(command)
 
 def goodbye_message(mac):
     if entries[mac]['name']:
-        command = ["festival", "--tts", f"Goodbye, {entries[mac]['name']}"]
+        command = ["festival", "--b", f"""'(SayText "Goodbye, {entries[mac]['name']})'"""]
         subprocess.Popen(command)
 
 
