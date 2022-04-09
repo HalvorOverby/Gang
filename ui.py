@@ -15,11 +15,11 @@ def ui(overskrift: str, underskrifter:list,startTid: datetime.datetime,vær: str
     gray= (116,118,136)
     
     X = 1920   
-    Y = 1080
+    Y = 980
 
     marg=10
-    largeFontSize=300
-    smallFontSize=100
+    largeFontSize=250
+    smallFontSize=75
 
 
     
