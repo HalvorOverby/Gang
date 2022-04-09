@@ -7,7 +7,7 @@ engine = pyttsx3.init()
 
 voices = engine.getProperty('voices')
 for voice in voices:
-    if voice.languages[0] == u'no_NB':
+    if voice.languages[0] == u'en_US':
         engine.setProperty('voice', voice.id)
         break
 
@@ -17,10 +17,11 @@ while True:
                     flush_cache=True, lookup_class=False)
     for device in nearby_devices:
         if not (device[0] in devices):
-            devices[device[0]] = {'name': 'Ukjent', 'deviceName': device[1]}
+            devices[device[0]] = {'name': device[1], 'deviceName': device[1]}
             engine.say("Ny besøkende registrert. Vennligst registrer i appen.")
         if not (device[0] in currently_visiting):
             currently_visiting.add(device[0])
+
     for device in currently_visiting:
         if device not in [d[0] for d in nearby_devices]:
             currently_visiting.remove(device)
