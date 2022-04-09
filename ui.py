@@ -33,7 +33,7 @@ def ui(overskrift: str, underskrifter:list,startTid: datetime.datetime,vær: str
     underoverskrift2= underoverskriftfont.render(underoverskrifter[1],True,gray,offwhite)
     underoverskrift3= underoverskriftfont.render(underoverskrifter[2],True,gray,offwhite)
     underoverskrift4= underoverskriftfont.render(underoverskrifter[3],True,gray,offwhite)
-    time=underoverskriftfont.render(startTid.strftime("%H:%M:%S"),True,gray,offwhite)
+    time=underoverskriftfont.render(startTid.strftime("%H:%M"),True,gray,offwhite)
     
     Recttittel=tittel.get_rect()
     Rectunderoverskrift1=underoverskrift1.get_rect()
@@ -63,7 +63,5 @@ def ui(overskrift: str, underskrifter:list,startTid: datetime.datetime,vær: str
                 pygame.quit()
                 quit()
         pygame.display.update()
-        sleep(1)
-        display_surface.blit(underoverskriftfont.render(datetime.datetime.now().strftime("%H %M"),True,gray,offwhite),Recttime)
 
 ui("Kom deg ut",["Dra til bunnpris","Handleliste:","     -smågodt","     -pant flasker"],datetime.datetime.now(),"sol")
