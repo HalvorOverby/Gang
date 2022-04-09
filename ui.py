@@ -15,12 +15,12 @@ def ui(overskrift: str, underskrifter:list,startTid: datetime.datetime,vær: str
     black= (0,0,0)
     gray= (116,118,136)
     
-    X = 1920   
-    Y = 1030
+    X = 1200   
+    Y = 675
 
-    marg=10
-    largeFontSize=250
-    smallFontSize=75
+    marg=(Y/80)
+    largeFontSize=int(X*10/108)
+    smallFontSize=int(Y*5/108)
 
 
     
@@ -43,10 +43,10 @@ def ui(overskrift: str, underskrifter:list,startTid: datetime.datetime,vær: str
     Recttime=time.get_rect()
 
     Recttittel.topleft = (marg, marg)
-    Rectunderoverskrift1.topleft = (2*marg,Recttittel.bottom+1.5*marg)
-    Rectunderoverskrift2.topleft = (2*marg,Rectunderoverskrift1.bottom+0.5*marg) #3*marg+largeFontSize+smallFontSize
-    Rectunderoverskrift3.topleft = (2*marg,Rectunderoverskrift2.bottom+0.5*marg)
-    Rectunderoverskrift4.topleft = (2*marg,Rectunderoverskrift3.bottom+0.5*marg)
+    Rectunderoverskrift1.topleft = (2*marg,Recttittel.bottom+marg)
+    Rectunderoverskrift2.topleft = (2*marg,Rectunderoverskrift1.bottom+marg) #3*marg+largeFontSize+smallFontSize
+    Rectunderoverskrift3.topleft = (2*marg,Rectunderoverskrift2.bottom+marg)
+    Rectunderoverskrift4.topleft = (2*marg,Rectunderoverskrift3.bottom+marg)
     Recttime.bottomright=(X-marg*2,Y-marg)
     
 
@@ -64,4 +64,4 @@ def ui(overskrift: str, underskrifter:list,startTid: datetime.datetime,vær: str
                 quit()
         pygame.display.update()
 
-ui("Kom deg ut",["Dra til bunnpris","Handleliste:","     -smågodt","     -pant flasker"],datetime.datetime.now(),"sol")
+ui("Kos deg i dag",["Møte HM","Jobbe med prosjekt","Komme deg i butikken"],datetime.datetime.now(),"sol")
