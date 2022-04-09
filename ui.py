@@ -18,8 +18,8 @@ def ui(overskrift: str, underskrifter:list,startTid: datetime.datetime,vær: str
     Y = 1080
 
     marg=10
-    largeFontSize=100
-    smallFontSize=30
+    largeFontSize=300
+    smallFontSize=100
 
 
     
