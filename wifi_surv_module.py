@@ -4,7 +4,7 @@ from mac_vendor_lookup import MacLookup
 import datetime
 import time
 import json
-import pyttsx3
+import os
 
 mac = MacLookup()
 
@@ -24,11 +24,13 @@ engine = pyttsx3.init()
 
 def welcome_message(mac):
     if entries[mac]['name']:
-        engine.say(f"Welcome {entries[mac]['name']}")
+        os.sys(f"""festival -b '(voice_cmu_us_slt_arctic_hts)' \
+        '(SayText "Welcome, {entries[mac]['name']}")'""")
 
 def goodbye_message(mac):
     if entries[mac]['name']:
-        engine.say(f"Goodbye {entries[mac]['name']}")
+        os.sys(f"""festival -b '(voice_cmu_us_slt_arctic_hts)' \
+        '(SayText "Goodbye, {entries[mac]['name']}")'""")
 
 
 def update_macs():
