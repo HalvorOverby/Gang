@@ -24,12 +24,12 @@ except:
 def welcome_message(mac):
     if entries[mac]['name']:
         subprocess.Popen(['festival', '-b', "'(voice_cmu_us_slt_arctic_hts)'", "\\", 
-        f"""'(SayText "Welcome, {entries[mac]['name']} I am hoping you have a good time.")'"""])
+        "'(SayText", "Welcome", entries[mac]['name']], ")'")
 
 def goodbye_message(mac):
     if entries[mac]['name']:
         subprocess.Popen(['festival', '-b', "'(voice_cmu_us_slt_arctic_hts)'", "\\", 
-        "'(SayText" "Goodbye", entries[mac]['name']], ")'")
+        "'(SayText", "Goodbye", entries[mac]['name']], ")'")
 
 
 def update_macs():
