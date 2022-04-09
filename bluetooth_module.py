@@ -9,7 +9,7 @@ engine = pyttsx3.init()
 
 while True:
     print()
-    nearby_devices = bluetooth.discover_devices(duration=10, lookup_names=True,
+    nearby_devices = bluetooth.discover_devices(duration=5, lookup_names=True,
                     flush_cache=True, lookup_class=False)
     for device in nearby_devices:
         if not (device[0] in devices):
@@ -27,6 +27,3 @@ while True:
             name = devices[device]["name"]
             engine.say(f"Goodbye, {name}")
     engine.runAndWait()
-    print("Current visitors:")
-    [print(dvs) for dvs in currently_visiting]
-    time.sleep(5)
