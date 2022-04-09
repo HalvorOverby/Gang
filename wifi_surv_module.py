@@ -20,7 +20,6 @@ try:
 except:
     entries = {}
 
-engine = pyttsx3.init()
 
 def welcome_message(mac):
     if entries[mac]['name']:
@@ -71,5 +70,4 @@ while True:
             file.write(json_data)
     update_macs()
     print(str(datetime.datetime.now()), ">")
-    engine.runAndWait()
     i += 1
