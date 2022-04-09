@@ -14,8 +14,8 @@ def ui(overskrift: str, underskrifter:list,startTid: datetime.datetime,vær: str
     black= (0,0,0)
     gray= (116,118,136)
     
-    X = 960    
-    Y = 540
+    X = 1920   
+    Y = 1080
 
     marg=10
     largeFontSize=100
@@ -46,7 +46,7 @@ def ui(overskrift: str, underskrifter:list,startTid: datetime.datetime,vær: str
     Rectunderoverskrift2.topleft = (2*marg,Rectunderoverskrift1.bottom+0.5*marg) #3*marg+largeFontSize+smallFontSize
     Rectunderoverskrift3.topleft = (2*marg,Rectunderoverskrift2.bottom+0.5*marg)
     Rectunderoverskrift4.topleft = (2*marg,Rectunderoverskrift3.bottom+0.5*marg)
-    Recttime.bottomright=(X-marg,Y-marg)
+    Recttime.bottomright=(X-marg*2,Y-marg)
     
 
     while True:
