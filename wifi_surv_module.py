@@ -23,12 +23,12 @@ except:
 
 def welcome_message(mac):
     if entries[mac]['name']:
-        os.sys(f"""festival -b '(voice_cmu_us_slt_arctic_hts)' \
+        os.system(f"""festival -b '(voice_cmu_us_slt_arctic_hts)' \
         '(SayText "Welcome, {entries[mac]['name']}")'""")
 
 def goodbye_message(mac):
     if entries[mac]['name']:
-        os.sys(f"""festival -b '(voice_cmu_us_slt_arctic_hts)' \
+        os.system(f"""festival -b '(voice_cmu_us_slt_arctic_hts)' \
         '(SayText "Goodbye, {entries[mac]['name']}")'""")
 
 
