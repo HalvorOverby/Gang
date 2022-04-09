@@ -21,11 +21,10 @@ while True:
             currently_visiting.add(device[0])
             name = devices[device[0]]["name"]
             engine.say(f"Welcome, {name}")
-            engine.runAndWait()
 
     for device in currently_visiting:
         if device not in [d[0] for d in nearby_devices]:
             currently_visiting.remove(device)
             engine.say(f"Goodbye, {name}")
-            engine.runAndWait()
+    engine.runAndWait()
     time.sleep(5)
