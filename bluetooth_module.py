@@ -1,6 +1,8 @@
 import pyttsx3
 import bluetooth
 devices = {} 
+currently_visiting = set()
+
 engine = pyttsx3.init()
 
 voices = engine.getProperty('voices')
@@ -17,6 +19,11 @@ while True:
         if not (device[0] in devices):
             devices[device[0]] = {'name': 'Ukjent', 'deviceName': device[1]}
             engine.say("Ny besøkende registrert. Vennligst registrer i appen.")
+        if not (device[0] in currently_visiting):
+            currently_visiting.add(device[0])
+    for device in currently_visiting:
+        if device not in [d[0] for d in nearby_devices]:
+            currently_visiting.remove(device)
     
     for device in nearby_devices:
         name = devices[device[0]]["name"]
