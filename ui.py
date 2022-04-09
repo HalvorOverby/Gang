@@ -15,7 +15,7 @@ def ui(overskrift: str, underskrifter:list,startTid: datetime.datetime,vær: str
     gray= (116,118,136)
     
     X = 1920   
-    Y = 1000
+    Y = 1030
 
     marg=10
     largeFontSize=250
@@ -64,4 +64,4 @@ def ui(overskrift: str, underskrifter:list,startTid: datetime.datetime,vær: str
                 quit()
         pygame.display.update()
 
-ui("God morgen",["Kollektivets handleliste:","     -pepper","     -ost","     -toalettpapir"],datetime.datetime.now(),"sol")
+ui("Kom deg ut",["Dra til bunnpris","Handleliste:","     -smågodt","     -pant flasker"],datetime.datetime.now(),"sol")
