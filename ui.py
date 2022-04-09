@@ -1,11 +1,16 @@
 import datetime
 import pygame
 
-
 pygame.init()
-def ui(overskrift: str, underskrift:str,startTid: datetime.datetime,vær: str):
+def ui(overskrift: str, underskrifter:list,startTid: datetime.datetime,vær: str):
+    
+    underoverskrifter=["","","",""]
+    if len(underskrifter)>0:
+        for i in range(min(len(underskrifter),4)):
+            underoverskrifter[i]=underskrifter[i]
+
     white = (255, 255, 255)
-    offwhite= (237,237,236)
+    offwhite= (250,250,250)
     black= (0,0,0)
     gray= (116,118,136)
     
@@ -14,26 +19,44 @@ def ui(overskrift: str, underskrift:str,startTid: datetime.datetime,vær: str):
 
     marg=10
     largeFontSize=100
-    smallFontSize=50
+    smallFontSize=30
+
+
     
     display_surface = pygame.display.set_mode((X, Y))
-    tittelfont = pygame.font.Font("freesansbold.ttf", largeFontSize)
-    underoverskriftfont= pygame.font.Font("freesansbold.ttf",smallFontSize)
+    tittelfont = pygame.font.SysFont("poppinsmedium", largeFontSize)
+    underoverskriftfont= pygame.font.SysFont("poppinsextralight",smallFontSize)
     
     tittel = tittelfont.render(overskrift, True, black, offwhite)
-    underoverskrift= underoverskriftfont.render(underskrift,True,gray,offwhite)
+    underoverskrift1= underoverskriftfont.render(underoverskrifter[0],True,gray,offwhite)
+    underoverskrift2= underoverskriftfont.render(underoverskrifter[1],True,gray,offwhite)
+    underoverskrift3= underoverskriftfont.render(underoverskrifter[2],True,gray,offwhite)
+    underoverskrift4= underoverskriftfont.render(underoverskrifter[3],True,gray,offwhite)
+    time=underoverskriftfont.render(startTid.strftime("%H:%M:%S"),True,gray,offwhite)
     
     Recttittel=tittel.get_rect()
-    Rectunderoverskrift=underoverskrift.get_rect()
+    Rectunderoverskrift1=underoverskrift1.get_rect()
+    Rectunderoverskrift2=underoverskrift2.get_rect()
+    Rectunderoverskrift3=underoverskrift3.get_rect()
+    Rectunderoverskrift4=underoverskrift4.get_rect()
+    Recttime=time.get_rect()
 
     Recttittel.topleft = (marg, marg)
-    Rectunderoverskrift.topleft = (marg,2*marg+largeFontSize)
+    Rectunderoverskrift1.topleft = (2*marg,Recttittel.bottom+1.5*marg)
+    Rectunderoverskrift2.topleft = (2*marg,Rectunderoverskrift1.bottom+0.5*marg) #3*marg+largeFontSize+smallFontSize
+    Rectunderoverskrift3.topleft = (2*marg,Rectunderoverskrift2.bottom+0.5*marg)
+    Rectunderoverskrift4.topleft = (2*marg,Rectunderoverskrift3.bottom+0.5*marg)
+    Recttime.bottomright=(X-marg,Y-marg)
     
 
     while True:
         display_surface.fill(offwhite)
         display_surface.blit(tittel, Recttittel)
-        display_surface.blit(underoverskrift,Rectunderoverskrift)
+        display_surface.blit(underoverskrift1,Rectunderoverskrift1)
+        display_surface.blit(underoverskrift2,Rectunderoverskrift2)
+        display_surface.blit(underoverskrift3,Rectunderoverskrift3)
+        display_surface.blit(underoverskrift4,Rectunderoverskrift4)
+        display_surface.blit(underoverskriftfont.render(datetime.datetime.now().strftime("%H:%M:%S"),True,gray,offwhite),Recttime)
 
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -41,4 +64,4 @@ def ui(overskrift: str, underskrift:str,startTid: datetime.datetime,vær: str):
                 quit()
         pygame.display.update()
 
-ui("God morgen :D","Memento mori",datetime.datetime.now(),"sol")
+ui("God morgen",["Kollektivets handleliste:","     -pepper","     -ost","     -toalettpapir"],datetime.datetime.now(),"sol")
