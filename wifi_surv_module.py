@@ -33,7 +33,7 @@ def goodbye_message(mac):
 
 def update_macs():
     global here_now
-    command = ['sudo', 'nmap', '-n', '-sn', '-T5', scan_IP + '/' + str(submask)]
+    command = ['sudo', 'nmap', '-snP', scan_IP + '/' + str(submask)]
     proc = subprocess.Popen(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
 
     o, e = proc.communicate()
