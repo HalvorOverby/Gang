@@ -16,13 +16,12 @@ while True:
     for device in nearby_devices:
         if not (device[0] in devices):
             devices[device[0]] = {'name': device[1], 'deviceName': device[1]}
-            engine.say("New visitor found. Please register in the app.")
         if not (device[0] in currently_visiting):
             currently_visiting.add(device[0])
             name = devices[device[0]]["name"]
             engine.say(f"Welcome, {name}")
 
-    for device in currently_visiting:
+    for device in currently_visiting.copy():
         if device not in [d[0] for d in nearby_devices]:
             currently_visiting.remove(device)
             engine.say(f"Goodbye, {name}")
