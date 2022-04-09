@@ -1,0 +1,1 @@
+https://www.reddit.com/r/pygame/comments/rgcluk/starting_pygame_on_a_raspberrypi_from_ssh_or/
