@@ -1,4 +1,5 @@
 import datetime
+from time import sleep
 import pygame
 
 pygame.init()
@@ -56,12 +57,13 @@ def ui(overskrift: str, underskrifter:list,startTid: datetime.datetime,vær: str
         display_surface.blit(underoverskrift2,Rectunderoverskrift2)
         display_surface.blit(underoverskrift3,Rectunderoverskrift3)
         display_surface.blit(underoverskrift4,Rectunderoverskrift4)
-        display_surface.blit(underoverskriftfont.render(datetime.datetime.now().strftime("%H:%M:%S"),True,gray,offwhite),Recttime)
-
+        display_surface.blit(underoverskriftfont.render(datetime.datetime.now().strftime("%H:%M"),True,gray,offwhite),Recttime)
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 pygame.quit()
                 quit()
         pygame.display.update()
+        sleep(1)
+        display_surface.blit(underoverskriftfont.render(datetime.datetime.now().strftime("%H %M"),True,gray,offwhite),Recttime)
 
 ui("Kom deg ut",["Dra til bunnpris","Handleliste:","     -smågodt","     -pant flasker"],datetime.datetime.now(),"sol")
