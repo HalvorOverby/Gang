@@ -18,7 +18,7 @@ for voice in voices:
     print(voice.id)
     #if "danish" in voice.id:
     engine.setProperty('voice', 'mb-en1')
-    engine.setProperty('rate', 110)
+    engine.setProperty('rate', 120)
     #    "https://raw.githubusercontent.com/numediart/MBROLA-voices/master/data/en1/en1"
 
 scan_IP = '10.0.0.0'
@@ -35,7 +35,7 @@ goodbye_messages = [
         "Hope they were a good friend."
     ]
 
-TIMEOUT_MINUTES = 0.1
+TIMEOUT_MINUTES = 1
 
 try:
     with open('people.json', 'r') as file:
