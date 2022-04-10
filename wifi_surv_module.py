@@ -6,95 +6,96 @@ import time
 import json
 import copy
 import random
+class Surveilance:
+    def __init__(self):
+        self.mac = MacLookup()
+        self.here_now = set()
+        self.scan_IP = '10.0.0.0'
+        self.submask = 24
+        self.welcome_messages = [
+                "How has your day been? Had any coffee today?",
+                "Are you hungry? Halvor could probably make you something.",
+                "You look like sparkling rose today.",
+                "Hope you have a good time visiting!"
+            ]
 
-mac = MacLookup()
+        self.TIMEOUT_MINUTES = 2
+        self.i = 0
 
-here_now = set()
+        try:
+            with open('people.json', 'r') as file:
+                self.entries = json.load(file)
+        except:
+            self.entries = {}
 
+    def say(self, text):
+        command = ["espeak", "-v", "mb-en1", f'" - ... - {text}"', "-p65", "-s180"]
+        subprocess.run(command)
 
+    def welcome_message(self, mac):
+        if self.entries[mac]['name']:
+            self.say(f"Welcome, {self.entries[mac]['name']}")
+            self.say(random.choice(self.welcome_messages))
+            
 
-scan_IP = '10.0.0.0'
-submask = 24
-welcome_messages = [
-        "How has your day been? Had any coffee today?",
-        "Are you hungry? Halvor could probably make you something.",
-        "You look like sparkling rose today.",
-        "Hope you have a good time visiting!"
-    ]
+    def goodbye_message(self, mac):
+        if self.entries[mac]['name']:
+            self.say(f"Goodbye, {self.entries[mac]['name']}")
+            
 
-TIMEOUT_MINUTES = 1
+    def scan(self, command):
+        proc = subprocess.Popen(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+        o, e = proc.communicate()
+        lines = o.decode('ascii').split('\n')
+        past_entries = copy.deepcopy(self.entries)
+        for i,line in enumerate(lines[:-4]):
+            if "Nmap scan report for" in line:
+                ip = line[21:]
+                mac = lines[i+2][13:30]
+                if mac in self.entries.keys():
+                    self.entries[mac]['ip'] = ip
+                    self.entries[mac]['last_seen'] = time.time()
+                else:
+                    self.entries[mac] = {'name': '','ip': ip, 'mac': mac, 'first_seen': time.time(), 'last_seen': time.time()}
+                self.here_now.add(mac)
 
-try:
-    with open('people.json', 'r') as file:
-        entries = json.load(file)
-except:
-    entries = {}
+        for mac in self.entries.keys():
+            if len(past_entries) and time.time() - self.entries[mac]['last_seen'] > 60*self.TIMEOUT_MINUTES and mac in self.here_now:
+                self.goodbye_message(mac)
+                self.here_now.remove(mac)
+        for mac in self.here_now:
+            if mac not in past_entries.keys() or time.time() - past_entries[mac]['last_seen'] > 60*self.TIMEOUT_MINUTES:
+                self.welcome_message(mac)
 
-def say(text):
-    command = ["espeak", "-v", "mb-en1", f'" - ... - {text}"', "-p65", "-s180"]
-    subprocess.run(command)
+    def fetch_names(self):
+        try:
+            with open('people.json', 'r') as file:
+                saved_entries = json.load(file)
+                for entry in saved_entries:
+                    self.entries[entry]['name'] = saved_entries[entry]['name']
+        except:
+            pass
 
-def welcome_message(mac):
-    if entries[mac]['name']:
-        say(f"Welcome, {entries[mac]['name']}")
-        say(random.choice(welcome_messages))
-        
-
-def goodbye_message(mac):
-    if entries[mac]['name']:
-        say(f"Goodbye, {entries[mac]['name']}")
-        
-
-def scan(command):
-    global here_now
-    proc = subprocess.Popen(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-    o, e = proc.communicate()
-    lines = o.decode('ascii').split('\n')
-    past_entries = copy.deepcopy(entries)
-    for i,line in enumerate(lines[:-4]):
-        if "Nmap scan report for" in line:
-            ip = line[21:]
-            mac = lines[i+2][13:30]
-            if mac in entries.keys():
-                entries[mac]['ip'] = ip
-                entries[mac]['last_seen'] = time.time()
+    def surveil(self):
+        while True:
+            if self.i % 60 == 0:
+                print(str(datetime.datetime.now()), "> Full scan")
+                self.scan(['sudo', 'nmap', '-snP', self.scan_IP + '/' + str(self.submask)])
+                self.fetch_names()
+                with open('people.json', 'w') as file:
+                    json_data = json.dumps(self.entries, indent=4)
+                    file.write(json_data)
             else:
-                entries[mac] = {'name': '','ip': ip, 'mac': mac, 'first_seen': time.time(), 'last_seen': time.time()}
-            here_now.add(mac)
+                print(str(datetime.datetime.now()), "> Regular scan")
+                self.scan(['sudo', 'nmap', '-snP'] + [entry['ip'] for entry in self.entries.values()])
 
-    for mac in entries.keys():
-        if len(past_entries) and time.time() - entries[mac]['last_seen'] > 60*TIMEOUT_MINUTES and mac in here_now:
-            goodbye_message(mac)
-            here_now.remove(mac)
-    for mac in here_now:
-        if mac not in past_entries.keys() or time.time() - past_entries[mac]['last_seen'] > 60*TIMEOUT_MINUTES:
-            welcome_message(mac)
+            if self.i % 5 == 0:
+                print(str(datetime.datetime.now()), "> Updating names")
+                self.fetch_names()
+            print(str(datetime.datetime.now()), "> Completed iteration")
+            self.i += 1
+            time.sleep(2)
+            self.get_guest_list()
 
-def fetch_names():
-    try:
-        with open('people.json', 'r') as file:
-            saved_entries = json.load(file)
-            for entry in saved_entries:
-                entries[entry]['name'] = saved_entries[entry]['name']
-    except:
-        pass
-
-i = 0
-while True:
-    if i % 60 == 0:
-        print(str(datetime.datetime.now()), "> Full scan")
-        scan(['sudo', 'nmap', '-snP', scan_IP + '/' + str(submask)])
-        fetch_names()
-        with open('people.json', 'w') as file:
-            json_data = json.dumps(entries, indent=4)
-            file.write(json_data)
-    else:
-        print(str(datetime.datetime.now()), "> Regular scan")
-        scan(['sudo', 'nmap', '-snP'] + [entry['ip'] for entry in entries.values()])
-
-    if i % 5 == 0:
-        print(str(datetime.datetime.now()), "> Updating names")
-        fetch_names()
-    print(str(datetime.datetime.now()), "> Completed iteration")
-    i += 1
-    time.sleep(2)
+    def get_guest_list(self):
+        [print(self.entries[mac]["name"]) for mac in self.here_now if self.entries[mac]["name"]]
