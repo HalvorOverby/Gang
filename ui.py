@@ -60,7 +60,7 @@ def ui(overskrift: str, underskrifter:list,startTid: datetime.datetime,vær: wea
     Rectunderoverskrift3.topleft = (2*marg,Rectunderoverskrift2.bottom+marg)
     Rectunderoverskrift4.topleft = (2*marg,Rectunderoverskrift3.bottom+marg)
     Recttime.bottomright=(X-marg*2,Y-marg)
-    RectWeather.topright=(X-marg,Recttittel.bottom+4*marg+largeFontSize)
+    RectWeather.topright=(X-marg,Recttittel.bottom+2*marg+largeFontSize)
     RectTemp.topleft=(RectWeather.left, Recttittel.bottom+marg)
     
     
@@ -91,4 +91,4 @@ def ui(overskrift: str, underskrifter:list,startTid: datetime.datetime,vær: wea
                 quit()
         pygame.display.update()
 
-ui("God Morgen",["Møte HM","Jobbe med prosjekt","Møte Elisa"],datetime.datetime.now(),weather())
+ui("God Dag",["Møte HM","Jobbe med prosjekt","Møte Elisa"],datetime.datetime.now(),weather())
