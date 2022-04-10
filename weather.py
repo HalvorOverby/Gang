@@ -74,17 +74,17 @@ class weather():
         
         #Calculation
         if rain==wind==cloud==0:
-            return 1
+            return "    Det er nydelig vær  "
         if rain==wind==0 and cloud==1:
-            return 2
+            return "    Det er fint vær     "
         if rain==0 and wind<2:
-            return 3
+            return "    Det er greit vær    "
         if rain==1 and wind<2:
-            return 4
+            return "    På med regnjakka!   "
         if rain==2 or wind==2:
-            return 5
+            return "Det er ganske dårlig vær"
         if wind==3 or rain==3:
-            return 6
+            return "ALARM! Revurder å gå ut!"
         
         
     
