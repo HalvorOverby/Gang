@@ -6,6 +6,7 @@ import pygame
 from weather import weather
 from wifi_surv_module import Surveilance
 import threading
+import json
 
 pygame.init()
 
@@ -82,6 +83,13 @@ def ui(overskrift: str, underskrifter:list,startTid: datetime.datetime,vær: wea
         display_surface.blit(tittelfont.render(f"{round(vær.temp)}°", True,gray,offwhite ),RectTemp)
         display_surface.blit(underoverskriftfont.render(vær.weatherstatus(), True,gray,offwhite),RectWeather)
         
+
+        #if datetime.datetime.now().second == 0:
+        with open("guests.json", "r") as file:
+            x = json.load(file)
+            underoverskrifter[0] = "Gjester:"
+            underoverskrifter[1] = x['guests'][0]
+            underoverskrifter[2] = x['guests'][1]
 
         if update and (datetime.datetime.now().minute%refreshrate==0):
             vær.updateWeather()
