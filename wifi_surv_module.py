@@ -18,6 +18,7 @@ for voice in voices:
     print(voice.id)
     #if "danish" in voice.id:
     engine.setProperty('voice', 'mb-en1')
+    engine.setProperty('rate', 110)
     #    "https://raw.githubusercontent.com/numediart/MBROLA-voices/master/data/en1/en1"
 
 scan_IP = '10.0.0.0'
