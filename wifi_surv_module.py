@@ -31,7 +31,7 @@ except:
     entries = {}
 
 def say(text):
-    command = ["espeak", "-v", "mb-en1", f'"Ah! {text}"', "-p65", "-s180"]
+    command = ["espeak", "-v", "mb-en1", f'" - ... -  {text}"', "-p65", "-s180"]
     subprocess.run(command)
 
 def welcome_message(mac):
