@@ -16,8 +16,6 @@ engine = pyttsx3.init()
 voices = engine.getProperty('voices')
 for voice in voices:
     print(voice.id)
-    if 'alva' in voice.id:
-        engine.setProperty('voice', voice.id)
 
 scan_IP = '10.0.0.0'
 submask = 24
