@@ -72,7 +72,7 @@ def ui(overskrift: str, underskrifter:list,startTid: datetime.datetime,vær: wea
         display_surface.blit(underoverskrift4,Rectunderoverskrift4)
         display_surface.blit(underoverskriftfont.render(datetime.datetime.now().strftime("%H:%M"),True,gray,offwhite),Recttime)
         display_surface.blit(underoverskriftfont.render(vær.weatherstatus(), True,gray,offwhite),RectWeather)
-        display_surface.blit(tittelfont.render(f"{round(vær.temp)}°", True,gray,offwhite ),RectTemp)
+        display_surface.blit(tittelfont.render(f"{vær.temp}°", True,gray,offwhite ),RectTemp)
 
         if update and (datetime.datetime.now().minute%refreshrate==0):
             vær.updateWeather()
@@ -87,4 +87,4 @@ def ui(overskrift: str, underskrifter:list,startTid: datetime.datetime,vær: wea
                 quit()
         pygame.display.update()
 
-ui("God Formiddag",["Møte HM","Jobbe med prosjekt","Møte Elisa"],datetime.datetime.now(),weather())
+ui("God Morgen",["Møte HM","Jobbe med prosjekt","Møte Elisa"],datetime.datetime.now(),weather())
