@@ -94,10 +94,18 @@ def ui(overskrift: str, underskrifter:list,startTid: datetime.datetime,vær: wea
 
         if update and (datetime.datetime.now().minute%refreshrate==0):
             vær.updateWeather()
-            #her kan du også oppdatere overskriftene osv
+            if 5<datetime.datetime.now().hour<11:
+                overskrift="God Morgen"
+            elif 11<=datetime.datetime.now().hour<18:
+                overskrift="God Dag"
+            elif 18<=datetime.datetime.now().hour<22:
+                overskift="God Kveld"
+            else:
+                overskift="God Natt"
             update=False
         if datetime.datetime.now().minute%refreshrate==1:
             update=True
+
 
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
