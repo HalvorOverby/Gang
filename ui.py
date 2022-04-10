@@ -74,7 +74,7 @@ def ui(overskrift: str, underskrifter:list,startTid: datetime.datetime,vær: wea
     
     while True:
         display_surface.fill(offwhite)
-        display_surface.blit(tittel, Recttittel)
+        display_surface.blit(tittelfont.render(overskrift, True, black, offwhite), Recttittel)
         display_surface.blit(underoverskriftfont.render(underoverskrifter[0],True,gray,offwhite),Rectunderoverskrift1)
         display_surface.blit(underoverskriftfont.render(underoverskrifter[1],True,gray,offwhite),Rectunderoverskrift2)
         display_surface.blit(underoverskriftfont.render(underoverskrifter[2],True,gray,offwhite),Rectunderoverskrift3)
