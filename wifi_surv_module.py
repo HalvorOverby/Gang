@@ -4,16 +4,37 @@ from mac_vendor_lookup import MacLookup
 import datetime
 import time
 import json
-import os
+import pyttsx3
+import copy
+import random
 
 mac = MacLookup()
 
 here_now = set()
 
+engine = pyttsx3.init()
+voices = engine.getProperty('voices')
+for voice in voices:
+    print(voice.id)
+    if 'alva' in voice.id:
+        engine.setProperty('voice', voice.id)
 
-#mac.update_vendors()
 scan_IP = '10.0.0.0'
 submask = 24
+welcome_messages = [
+        "How has your day been? Had any coffee today?",
+        "Are you hungry? Halvor could probably make you something.",
+        "You look like sparkling rose today.",
+        "Hope you have a good time visiting!",
+        "u r not cool i will fuck ur mum"
+    ]
+goodbye_messages = [
+        "Please rate your guest on a scale from 1 to 10 in the app.",
+        "Hope they were a good friend."
+    ]
+
+TIMEOUT_MINUTES = 0.1
+
 try:
     with open('people.json', 'r') as file:
         entries = json.load(file)
@@ -23,51 +44,67 @@ except:
 
 def welcome_message(mac):
     if entries[mac]['name']:
-        command = ["festival", "-b", f"""'(SayText "Welcome, {entries[mac]['name']})'"""]
-        subprocess.Popen(command)
+        engine.say(f"Velkommen, {entries[mac]['name']}")
+        engine.say(random.choice(welcome_messages))
+        
 
 def goodbye_message(mac):
     if entries[mac]['name']:
-        command = ["festival", "-b", f"""'(SayText "Goodbye, {entries[mac]['name']})'"""]
-        subprocess.Popen(command)
+        engine.say(f"Hej då, {entries[mac]['name']}")
+        engine.say(random.choice(goodbye_messages))
+        
 
-
-def update_macs():
+def scan(command):
     global here_now
-    command = ['sudo', 'nmap', '-snP', scan_IP + '/' + str(submask)]
     proc = subprocess.Popen(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-
     o, e = proc.communicate()
-
     lines = o.decode('ascii').split('\n')
-    here_right_now = set()
+    past_entries = copy.deepcopy(entries)
     for i,line in enumerate(lines[:-4]):
         if "Nmap scan report for" in line:
-            ip = line[20:]
+            ip = line[21:]
             mac = lines[i+2][13:30]
             if mac in entries.keys():
                 entries[mac]['ip'] = ip
-                entries[mac]['last_seen'] = str(datetime.datetime.now())
+                entries[mac]['last_seen'] = time.time()
             else:
-                entries[mac] = {'name': '','ip': ip, 'mac': mac, 'first_seen': str(datetime.datetime.now()), 'last_seen': str(datetime.datetime.now())}
-                try:
-                    entries[mac]['vendor'] = mac.lookup(mac)
-                except:
-                    entries[mac]['vendor'] = 'Unknown'
-            here_right_now.add(mac)
-    for mac in here_right_now.difference(here_now):
-        welcome_message(mac)
-    for mac in here_now.difference(here_right_now):
-        goodbye_message(mac)
-    here_now = here_right_now.copy()
+                entries[mac] = {'name': '','ip': ip, 'mac': mac, 'first_seen': time.time(), 'last_seen': time.time()}
+            here_now.add(mac)
 
+    for mac in entries.keys():
+        if len(past_entries) and time.time() - entries[mac]['last_seen'] > 60*TIMEOUT_MINUTES and mac in here_now:
+            goodbye_message(mac)
+            here_now.remove(mac)
+    for mac in here_now:
+        if mac not in past_entries.keys() or time.time() - past_entries[mac]['last_seen'] > 60*TIMEOUT_MINUTES:
+            welcome_message(mac)
+
+def fetch_names():
+    try:
+        with open('people.json', 'r') as file:
+            saved_entries = json.load(file)
+            for entry in saved_entries:
+                entries[entry]['name'] = saved_entries[entry]['name']
+    except:
+        pass
 
 i = 0
 while True:
-    if i % 1 == 0:
+    if i % 60 == 0:
+        print(str(datetime.datetime.now()), "> Full scan")
+        scan(['sudo', 'nmap', '-snP', scan_IP + '/' + str(submask)])
+        fetch_names()
         with open('people.json', 'w') as file:
             json_data = json.dumps(entries, indent=4)
             file.write(json_data)
-    update_macs()
-    print(str(datetime.datetime.now()), ">")
+    else:
+        print(str(datetime.datetime.now()), "> Regular scan")
+        scan(['sudo', 'nmap', '-snP'] + [entry['ip'] for entry in entries.values()])
+
+    if i % 5 == 0:
+        print(str(datetime.datetime.now()), "> Updating names")
+        fetch_names()
+    engine.runAndWait()
+    print(str(datetime.datetime.now()), "> Completed iteration")
     i += 1
+    time.sleep(2)
