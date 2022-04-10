@@ -4,10 +4,15 @@ from time import sleep
 import time
 import pygame
 from weather import weather
+from wifi_surv_module import Surveilance
+import threading
 
 pygame.init()
 
 def ui(overskrift: str, underskrifter:list,startTid: datetime.datetime,vær: weather):
+    surv = Surveilance()
+    x = threading.Thread(target=surv.surveil)
+    x.start()
     underoverskrifter=["","","",""]
     if len(underskrifter)>0:
         for i in range(min(len(underskrifter),4)):
