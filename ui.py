@@ -87,4 +87,4 @@ def ui(overskrift: str, underskrifter:list,startTid: datetime.datetime,vær: wea
                 quit()
         pygame.display.update()
 
-ui("God Morgen",["Møte HM","Jobbe med prosjekt","Komme deg i butikken"],datetime.datetime.now(),weather())
+ui("God Formiddag",["Møte HM","Jobbe med prosjekt","Møte Elisa"],datetime.datetime.now(),weather())

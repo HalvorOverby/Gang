@@ -74,13 +74,13 @@ class weather():
         
         #Calculation
         if rain==wind==cloud==0:
-            return "    Det er nydelig vær  "
+            return "Det er nydelig vær"
         if rain==wind==0 and cloud==1:
-            return "    Det er fint vær     "
+            return "Det er fint vær"
         if rain==0 and wind<2:
-            return "    Det er greit vær    "
+            return "Det er greit vær"
         if rain==1 and wind<2:
-            return "    På med regnjakka!   "
+            return "På med regnjakka!"
         if rain==2 or wind==2:
             return "Det er ganske dårlig vær"
         if wind==3 or rain==3:
@@ -90,3 +90,6 @@ class weather():
     
     def __str__(self):
         return f"Tid\t\t{self.time}\nTemp\t\t{self.temp}\nSkydekke\t{self.cloudFraction}\nVindVinkel\t{self.windDirection}\nVindHastighet\t{self.windSpeed}\nSymbol\t\t{self.symbol}\nRegnmengde\t{self.rainAmount}\nSymbol6\t\t{self.next6hoursSymbol}\nRegnmengde6\t{self.next6hoursRainAmount}"
+
+vear=weather()
+print(str(vear))
