@@ -89,11 +89,11 @@ def ui(overskrift: str, underskrifter:list,startTid: datetime.datetime,vær: wea
                 x = json.load(file)
                 underoverskrifter = ["", "", "", ""]
                 underoverskrifter[0] = "Gjester:"
-                if len(x['guests']) == 1:
+                if len(x['guests']) >= 1:
                     underoverskrifter[1] = x['guests'][0]
-                elif len(x['guests' ]) == 2:
+                if len(x['guests' ]) >= 2:
                     underoverskrifter[2] = x['guests'][1]
-                elif len(x['guests']) == 3:
+                if len(x['guests']) == 3:
                     underoverskrifter[3] = x['guests'][2]
 
         if update and (datetime.datetime.now().minute%refreshrate==0):
