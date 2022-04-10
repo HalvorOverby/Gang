@@ -17,7 +17,7 @@ voices = engine.getProperty('voices')
 for voice in voices:
     #if "danish" in voice.id:
     engine.setProperty('voice', 'mb-en1')
-    engine.setProperty('rate', 100)
+    engine.setProperty('rate', 50)
     #    "https://raw.githubusercontent.com/numediart/MBROLA-voices/master/data/en1/en1"
 
 scan_IP = '10.0.0.0'
@@ -26,8 +26,7 @@ welcome_messages = [
         "How has your day been? Had any coffee today?",
         "Are you hungry? Halvor could probably make you something.",
         "You look like sparkling rose today.",
-        "Hope you have a good time visiting!",
-        "u r not cool i will fuck ur mum"
+        "Hope you have a good time visiting!"
     ]
 goodbye_messages = [
         "Please rate your guest on a scale from 1 to 10 in the app.",
