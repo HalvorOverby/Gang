@@ -17,7 +17,7 @@ voices = engine.getProperty('voices')
 for voice in voices:
     #if "danish" in voice.id:
     engine.setProperty('voice', 'mb-en1')
-    engine.setProperty('rate', 120)
+    engine.setProperty('rate', 100)
     #    "https://raw.githubusercontent.com/numediart/MBROLA-voices/master/data/en1/en1"
 
 scan_IP = '10.0.0.0'
@@ -45,12 +45,14 @@ except:
 
 def welcome_message(mac):
     if entries[mac]['name']:
+        engine.say(" ")
         engine.say(f"Welcome, {entries[mac]['name']}")
         engine.say(random.choice(welcome_messages))
         
 
 def goodbye_message(mac):
     if entries[mac]['name']:
+        engine.say(" ")
         engine.say(f"Goodbye, {entries[mac]['name']}")
         engine.say(random.choice(goodbye_messages))
         
