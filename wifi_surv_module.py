@@ -17,7 +17,7 @@ voices = engine.getProperty('voices')
 for voice in voices:
     print(voice.id)
     #if "danish" in voice.id:
-    #    engine.setProperty('voice', voice.id)
+    engine.setProperty('voice', 'mbrola-en')
     #    "https://raw.githubusercontent.com/numediart/MBROLA-voices/master/data/en1/en1"
 
 scan_IP = '10.0.0.0'
