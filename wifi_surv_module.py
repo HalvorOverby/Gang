@@ -16,6 +16,8 @@ engine = pyttsx3.init()
 voices = engine.getProperty('voices')
 for voice in voices:
     print(voice.id)
+    if "danish" in voice.id:
+        engine.setProperty(voice.id)
 
 scan_IP = '10.0.0.0'
 submask = 24
@@ -42,13 +44,13 @@ except:
 
 def welcome_message(mac):
     if entries[mac]['name']:
-        engine.say(f"Velkommen, {entries[mac]['name']}")
+        engine.say(f"Welcome, {entries[mac]['name']}")
         engine.say(random.choice(welcome_messages))
         
 
 def goodbye_message(mac):
     if entries[mac]['name']:
-        engine.say(f"Hej då, {entries[mac]['name']}")
+        engine.say(f"Goodbye, {entries[mac]['name']}")
         engine.say(random.choice(goodbye_messages))
         
 
