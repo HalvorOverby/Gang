@@ -14,6 +14,7 @@ def ui(overskrift: str, underskrifter:list,startTid: datetime.datetime,vær: wea
             underoverskrifter[i]=underskrifter[i]
 
     refreshrate=30#every x minute
+    update=False
 
 
     white = (255, 255, 255)
@@ -62,8 +63,8 @@ def ui(overskrift: str, underskrifter:list,startTid: datetime.datetime,vær: wea
     RectTemp.topleft=(Recttittel.right, Recttittel.bottom+marg)
     RectWeather.topleft=(RectTemp.left,RectTemp.bottom+int(marg*0.5))
 
+    
     while True:
-        update=False
         display_surface.fill(offwhite)
         display_surface.blit(tittel, Recttittel)
         display_surface.blit(underoverskrift1,Rectunderoverskrift1)
