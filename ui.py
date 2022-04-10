@@ -1,15 +1,16 @@
 import datetime
 from time import sleep
+import time
 import pygame
+from weather import weather
 
 pygame.init()
-def ui(overskrift: str, underskrifter:list,startTid: datetime.datetime,vær: str):
-    
+
+def ui(overskrift: str, underskrifter:list,startTid: datetime.datetime,vær: weather):
     underoverskrifter=["","","",""]
     if len(underskrifter)>0:
         for i in range(min(len(underskrifter),4)):
             underoverskrifter[i]=underskrifter[i]
-
     white = (255, 255, 255)
     offwhite= (250,250,250)
     black= (0,0,0)
@@ -34,13 +35,15 @@ def ui(overskrift: str, underskrifter:list,startTid: datetime.datetime,vær: str
     underoverskrift3= underoverskriftfont.render(underoverskrifter[2],True,gray,offwhite)
     underoverskrift4= underoverskriftfont.render(underoverskrifter[3],True,gray,offwhite)
     time=underoverskriftfont.render(startTid.strftime("%H:%M"),True,gray,offwhite)
-    
+    værstatus= underoverskriftfont.render(vær.next6hoursSymbol, True,black,offwhite )
+
     Recttittel=tittel.get_rect()
     Rectunderoverskrift1=underoverskrift1.get_rect()
     Rectunderoverskrift2=underoverskrift2.get_rect()
     Rectunderoverskrift3=underoverskrift3.get_rect()
     Rectunderoverskrift4=underoverskrift4.get_rect()
     Recttime=time.get_rect()
+    RectWeather=værstatus.get_rect()
 
     Recttittel.topleft = (marg, marg)
     Rectunderoverskrift1.topleft = (2*marg,Recttittel.bottom+marg)
@@ -48,9 +51,10 @@ def ui(overskrift: str, underskrifter:list,startTid: datetime.datetime,vær: str
     Rectunderoverskrift3.topleft = (2*marg,Rectunderoverskrift2.bottom+marg)
     Rectunderoverskrift4.topleft = (2*marg,Rectunderoverskrift3.bottom+marg)
     Recttime.bottomright=(X-marg*2,Y-marg)
-    
+    RectWeather.center=(2.0/3 * X,Y//2)
 
     while True:
+        update=False
         display_surface.fill(offwhite)
         display_surface.blit(tittel, Recttittel)
         display_surface.blit(underoverskrift1,Rectunderoverskrift1)
@@ -58,10 +62,19 @@ def ui(overskrift: str, underskrifter:list,startTid: datetime.datetime,vær: str
         display_surface.blit(underoverskrift3,Rectunderoverskrift3)
         display_surface.blit(underoverskrift4,Rectunderoverskrift4)
         display_surface.blit(underoverskriftfont.render(datetime.datetime.now().strftime("%H:%M"),True,gray,offwhite),Recttime)
+        display_surface.blit(værstatus,RectWeather)
+
+        if update and (datetime.datetime.now().minute==30 or datetime.datetime.now().minute==0):
+            weather.updateWeather()
+            #her kan du også oppdatere overskriftene osv
+            update=False
+        if datetime.datetime.now().minute==31 or datetime.datetime.now().minute==1:
+            update=True
+
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 pygame.quit()
                 quit()
         pygame.display.update()
 
-ui("Kos deg i dag",["Møte HM","Jobbe med prosjekt","Komme deg i butikken"],datetime.datetime.now(),"sol")
+ui("Kos deg i dag",["Møte HM","Jobbe med prosjekt","Komme deg i butikken"],datetime.datetime.now(),weather())
