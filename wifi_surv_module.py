@@ -90,12 +90,12 @@ class Surveilance:
                 self.scan(['sudo', 'nmap', '-snP'] + [entry['ip'] for entry in self.entries.values()])
 
             if self.i % 5 == 0:
+                self.get_guest_list()
                 print(str(datetime.datetime.now()), "> Updating names")
                 self.fetch_names()
             print(str(datetime.datetime.now()), "> Completed iteration")
             self.i += 1
             time.sleep(2)
-            self.get_guest_list()
 
     def get_guest_list(self):
         with open("guests.json", "w") as file:

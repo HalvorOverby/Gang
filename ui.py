@@ -88,8 +88,9 @@ def ui(overskrift: str, underskrifter:list,startTid: datetime.datetime,vær: wea
         with open("guests.json", "r") as file:
             x = json.load(file)
             underoverskrifter[0] = "Gjester:"
-            underoverskrifter[1] = x['guests'][0]
-            underoverskrifter[2] = x['guests'][1]
+            if len(x) == 2:
+                underoverskrifter[1] = x['guests'][0]
+                underoverskrifter[2] = x['guests'][1]
 
         if update and (datetime.datetime.now().minute%refreshrate==0):
             vær.updateWeather()
