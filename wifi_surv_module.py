@@ -17,7 +17,7 @@ voices = engine.getProperty('voices')
 for voice in voices:
     print(voice.id)
     if "danish" in voice.id:
-        engine.setProperty(voice.id)
+        engine.setProperty('voice', voice.id)
 
 scan_IP = '10.0.0.0'
 submask = 24
