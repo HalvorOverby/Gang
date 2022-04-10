@@ -60,8 +60,10 @@ def ui(overskrift: str, underskrifter:list,startTid: datetime.datetime,vær: wea
     Rectunderoverskrift3.topleft = (2*marg,Rectunderoverskrift2.bottom+marg)
     Rectunderoverskrift4.topleft = (2*marg,Rectunderoverskrift3.bottom+marg)
     Recttime.bottomright=(X-marg*2,Y-marg)
-    RectTemp.topleft=(Recttittel.right, Recttittel.bottom+marg)
-    RectWeather.topleft=(RectTemp.left,RectTemp.bottom+int(marg*0.5))
+    RectWeather.topright=(X-marg,Recttittel.bottom+4*marg+largeFontSize)
+    RectTemp.topleft=(RectWeather.left, Recttittel.bottom+marg)
+    
+    
 
     
     while True:
@@ -72,8 +74,9 @@ def ui(overskrift: str, underskrifter:list,startTid: datetime.datetime,vær: wea
         display_surface.blit(underoverskrift3,Rectunderoverskrift3)
         display_surface.blit(underoverskrift4,Rectunderoverskrift4)
         display_surface.blit(underoverskriftfont.render(datetime.datetime.now().strftime("%H:%M"),True,gray,offwhite),Recttime)
+        display_surface.blit(tittelfont.render(f"{round(vær.temp)}°", True,gray,offwhite ),RectTemp)
         display_surface.blit(underoverskriftfont.render(vær.weatherstatus(), True,gray,offwhite),RectWeather)
-        display_surface.blit(tittelfont.render(f"{vær.temp}°", True,gray,offwhite ),RectTemp)
+        
 
         if update and (datetime.datetime.now().minute%refreshrate==0):
             vær.updateWeather()
