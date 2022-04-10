@@ -40,4 +40,8 @@ class weather():
         for WeatherAtTime in WeatherForDay:
             if WeatherAtTime['time'] == currentTime:
                 return WeatherAtTime
+    def toString(self):
+        return f"Tid=\t\t{self.time}\nTemp=\t\t{self.temp}\nSkydekke=\t{self.cloudFraction}\nVindVinkel=\t{self.windDirection}\nVindHastighet=\t{self.windSpeed}\nSymbol=\t\t{self.symbol}\nRegnmengde=\t{self.rainAmount}\nSymbol6=\t{self.next6hoursSymbol}\nRegnmengde6=\t{self.next6hoursRainAmount}"
+
 vear= weather()
+print(vear.toString())
