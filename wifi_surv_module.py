@@ -22,7 +22,7 @@ welcome_messages = [
         "Hope you have a good time visiting!"
     ]
 
-TIMEOUT_MINUTES = 1
+TIMEOUT_MINUTES = 0.1
 
 try:
     with open('people.json', 'r') as file:
