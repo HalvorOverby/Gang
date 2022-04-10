@@ -32,7 +32,7 @@ except:
 
 def say(text):
     command = ["espeak", "-v", "mb-en1", f'"{text}"']
-    subprocess.Popen(command)
+    subprocess.run(command)
 
 def welcome_message(mac):
     if entries[mac]['name']:
