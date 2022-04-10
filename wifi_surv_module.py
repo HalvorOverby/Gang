@@ -98,4 +98,5 @@ class Surveilance:
             self.get_guest_list()
 
     def get_guest_list(self):
-        [print(self.entries[mac]["name"]) for mac in self.here_now if self.entries[mac]["name"]]
+        with open("guests.json", "w") as file:
+            json.dumps([self.entries[mac]["name"] for mac in self.here_now if self.entries[mac]["name"]])
