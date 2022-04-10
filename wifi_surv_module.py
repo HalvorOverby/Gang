@@ -4,7 +4,6 @@ from mac_vendor_lookup import MacLookup
 import datetime
 import time
 import json
-import pyttsx3
 import copy
 import random
 
@@ -12,13 +11,7 @@ mac = MacLookup()
 
 here_now = set()
 
-engine = pyttsx3.init()
-voices = engine.getProperty('voices')
-for voice in voices:
-    #if "danish" in voice.id:
-    engine.setProperty('voice', 'english')
-    engine.setProperty('rate', 120)
-    #    "https://raw.githubusercontent.com/numediart/MBROLA-voices/master/data/en1/en1"
+
 
 scan_IP = '10.0.0.0'
 submask = 24
@@ -29,7 +22,7 @@ welcome_messages = [
         "Hope you have a good time visiting!"
     ]
 
-TIMEOUT_MINUTES = 1
+TIMEOUT_MINUTES = 0.1
 
 try:
     with open('people.json', 'r') as file:
@@ -37,18 +30,19 @@ try:
 except:
     entries = {}
 
+def say(text):
+    command = ["espeak", "-v", "mb-en1", f'" - ... -  {text}"', "-p65", "-s180"]
+    subprocess.run(command)
 
 def welcome_message(mac):
     if entries[mac]['name']:
-        engine.say(" ")
-        engine.say(f"Welcome, {entries[mac]['name']}")
-        engine.say(random.choice(welcome_messages))
+        say(f"Welcome, {entries[mac]['name']}")
+        say(random.choice(welcome_messages))
         
 
 def goodbye_message(mac):
     if entries[mac]['name']:
-        engine.say(" ")
-        engine.say(f"Goodbye, {entries[mac]['name']}")
+        say(f"Goodbye, {entries[mac]['name']}")
         
 
 def scan(command):
@@ -101,7 +95,6 @@ while True:
     if i % 5 == 0:
         print(str(datetime.datetime.now()), "> Updating names")
         fetch_names()
-    engine.runAndWait()
     print(str(datetime.datetime.now()), "> Completed iteration")
     i += 1
     time.sleep(2)
