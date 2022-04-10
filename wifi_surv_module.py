@@ -31,7 +31,7 @@ except:
     entries = {}
 
 def say(text):
-    command = ["espeak", "-v", "mb-en1", f'"Ah! {text}"', "-p50", "-s150"]
+    command = ["espeak", "-v", "mb-en1", f'"Ah! {text}"', "-p65", "-s180"]
     subprocess.run(command)
 
 def welcome_message(mac):
@@ -42,7 +42,6 @@ def welcome_message(mac):
 
 def goodbye_message(mac):
     if entries[mac]['name']:
-        say(" ")
         say(f"Goodbye, {entries[mac]['name']}")
         
 
