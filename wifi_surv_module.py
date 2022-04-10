@@ -16,8 +16,7 @@ engine = pyttsx3.init()
 voices = engine.getProperty('voices')
 for voice in voices:
     #if "danish" in voice.id:
-    engine.setProperty('voice', 'mb-en1+m0')
-    engine.setProperty('rate', 60)
+    engine.setProperty('voice', 'mb-en1+m')
     #    "https://raw.githubusercontent.com/numediart/MBROLA-voices/master/data/en1/en1"
 
 scan_IP = '10.0.0.0'
