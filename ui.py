@@ -71,8 +71,10 @@ def ui(overskrift: str, underskrifter:list,startTid: datetime.datetime,vær: wea
     
     
 
-    
+    i = 0
     while True:
+        print(i)
+        i += 1
         display_surface.fill(offwhite)
         display_surface.blit(tittelfont.render(overskrift, True, black, offwhite), Recttittel)
         display_surface.blit(underoverskriftfont.render(underoverskrifter[0],True,gray,offwhite),Rectunderoverskrift1)
@@ -83,13 +85,13 @@ def ui(overskrift: str, underskrifter:list,startTid: datetime.datetime,vær: wea
         display_surface.blit(tittelfont.render(f"{round(vær.temp)}°", True,gray,offwhite ),RectTemp)
         display_surface.blit(underoverskriftfont.render(vær.weatherstatus(), True,gray,offwhite),RectWeather)
         
-
-        with open("guests.json", "r") as file:
-            x = json.load(file)
-            underoverskrifter[0] = "Gjester:"
-            if len(x) == 2:
-                underoverskrifter[1] = x['guests'][0]
-                underoverskrifter[2] = x['guests'][1]
+        if i % 30 == 0:
+            with open("guests.json", "r") as file:
+                x = json.load(file)
+                underoverskrifter[0] = "Gjester:"
+                if len(x['guests']) == 2:
+                    underoverskrifter[1] = x['guests'][0]
+                    underoverskrifter[2] = x['guests'][1]
 
         if update and (datetime.datetime.now().minute%refreshrate==0):
             vær.updateWeather()
