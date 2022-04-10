@@ -22,7 +22,7 @@ welcome_messages = [
         "Hope you have a good time visiting!"
     ]
 
-TIMEOUT_MINUTES = 0.1
+TIMEOUT_MINUTES = 1
 
 try:
     with open('people.json', 'r') as file:
@@ -31,7 +31,7 @@ except:
     entries = {}
 
 def say(text):
-    command = ["espeak", "-v", "mb-en1", f'" - ... -  {text}"', "-p65", "-s180"]
+    command = ["espeak", "-v", "mb-en1", f'" - ... - {text}"', "-p65", "-s180"]
     subprocess.run(command)
 
 def welcome_message(mac):
