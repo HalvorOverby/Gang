@@ -15,7 +15,6 @@ here_now = set()
 engine = pyttsx3.init()
 voices = engine.getProperty('voices')
 for voice in voices:
-    print(voice.id)
     #if "danish" in voice.id:
     engine.setProperty('voice', 'mb-en1')
     engine.setProperty('rate', 120)
