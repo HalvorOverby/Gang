@@ -16,8 +16,8 @@ engine = pyttsx3.init()
 voices = engine.getProperty('voices')
 for voice in voices:
     #if "danish" in voice.id:
-    engine.setProperty('voice', 'mb-en1')
-    engine.setProperty('rate', 50)
+    engine.setProperty('voice', 'mb-en1+f2')
+    engine.setProperty('rate', 60)
     #    "https://raw.githubusercontent.com/numediart/MBROLA-voices/master/data/en1/en1"
 
 scan_IP = '10.0.0.0'
@@ -27,10 +27,6 @@ welcome_messages = [
         "Are you hungry? Halvor could probably make you something.",
         "You look like sparkling rose today.",
         "Hope you have a good time visiting!"
-    ]
-goodbye_messages = [
-        "Please rate your guest on a scale from 1 to 10 in the app.",
-        "Hope they were a good friend."
     ]
 
 TIMEOUT_MINUTES = 1
@@ -53,7 +49,6 @@ def goodbye_message(mac):
     if entries[mac]['name']:
         engine.say(" ")
         engine.say(f"Goodbye, {entries[mac]['name']}")
-        engine.say(random.choice(goodbye_messages))
         
 
 def scan(command):
