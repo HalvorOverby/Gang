@@ -37,7 +37,10 @@ class weather():
         self.next6hoursRainAmount=dictionary["data"]["next_6_hours"]["details"]['precipitation_amount']
 
     def getCurrentWeatherDict(self, WeatherForDay: list):
-        currentTime=f"{datetime.now().date()}T{datetime.now().hour}:00:00Z"    
+        hour=datetime.now().hour
+        if datetime.now().minute>30:
+            hour+=1
+        currentTime=f"{datetime.now().date()}T{hour}:00:00Z"    
         for WeatherAtTime in WeatherForDay:
             if WeatherAtTime['time'] == currentTime:
                 return WeatherAtTime
