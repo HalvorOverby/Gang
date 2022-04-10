@@ -1,4 +1,5 @@
 from datetime import datetime
+from webbrowser import Elinks
 import requests
 import json
 
@@ -40,10 +41,53 @@ class weather():
         for WeatherAtTime in WeatherForDay:
             if WeatherAtTime['time'] == currentTime:
                 return WeatherAtTime
-    def weatherstatus(self):#Tanken er å rangsjere været fra og med 0 til og med 3
-        pass
+    
+    def weatherstatus(self):#Tanken er å rangsjere været fra og med 1 til og med 6. 1 er skyfri himmel ,ingen regn og vind og 20 deg. 2 er
+        #rain
+        if self.rainAmount==0:
+            rain=0
+        elif 0<self.rainAmount<0.2:
+            rain=1
+        elif 0.2<=self.rainAmount<1.8:
+            rain=2
+        elif 1.8<=self.rainAmount:
+            rain=3
+        
+        #wind
+        if self.windSpeed<4:
+            wind=0
+        elif 4<=self.windSpeed<10:
+            wind=1
+        elif 10<=self.windSpeed<22:
+            wind=2
+        elif 22<=self.windSpeed:
+            wind=3
+        
+        #cloud
+        if self.cloudFraction<20:
+            cloud=0
+        else:
+            cloud=1
+        
+        #Calculation
+        if rain==wind==cloud==0:
+            return 1
+        if rain==wind==0 and cloud==1:
+            return 2
+        if rain==0 and wind<2:
+            return 3
+        if rain==1 and wind<2:
+            return 4
+        if rain==2 or wind==2:
+            return 5
+        if wind==3 or rain==3:
+            return 6
+        
+        
+    
     def toString(self):
         return f"Tid\t\t{self.time}\nTemp\t\t{self.temp}\nSkydekke\t{self.cloudFraction}\nVindVinkel\t{self.windDirection}\nVindHastighet\t{self.windSpeed}\nSymbol\t\t{self.symbol}\nRegnmengde\t{self.rainAmount}\nSymbol6\t\t{self.next6hoursSymbol}\nRegnmengde6\t{self.next6hoursRainAmount}"
 
 vear= weather()
 print(vear.toString())
+print(vear.weatherstatus())
