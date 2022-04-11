@@ -8,7 +8,7 @@ class weather():
     headers={'User-Agent': 'Raspberry pi 3a+ gang prodject https://github.com/HalvorOverby/Gang'}
     time=""
     temp=0.0
-    cloudFraction=0.0;
+    cloudFraction=0.0
     windDirection=0
     windSpeed=0
     symbol=""
@@ -51,13 +51,13 @@ class weather():
         #rain
         if self.rainAmount==0:
             rain=0
-        elif 0<self.rainAmount<0.2:
+        elif 0<self.rainAmount<0.8:
             rain=1
-        elif 0.2<=self.rainAmount<1.8:
+        elif 0.8<=self.rainAmount<1.8:
             rain=2
         elif 1.8<=self.rainAmount:
             rain=3
-        
+            
         #wind
         if self.windSpeed<4:
             wind=0
@@ -92,3 +92,5 @@ class weather():
     
     def __str__(self):
         return f"Tid\t\t{self.time}\nTemp\t\t{self.temp}\nSkydekke\t{self.cloudFraction}\nVindVinkel\t{self.windDirection}\nVindHastighet\t{self.windSpeed}\nSymbol\t\t{self.symbol}\nRegnmengde\t{self.rainAmount}\nSymbol6\t\t{self.next6hoursSymbol}\nRegnmengde6\t{self.next6hoursRainAmount}"
+
+print(str(weather().weatherstatus()))
