@@ -46,7 +46,7 @@ def ui(overskrift: str, underskrifter:list,startTid: datetime.datetime,vær: wea
 
     marg=(Y/80)
     largeFontSize=int(X*11/108)
-    smallFontSize=int(Y*5/108)
+    smallFontSize=int(Y*7/108)
 
 
     
