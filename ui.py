@@ -17,8 +17,10 @@ class GuestList:
         self.guests = new
     def at(self, n):
         if len(self.guests) > n:
-            return self.guests[n]
+            return self.guests[n % self.size()]
         return ""
+    def size(self):
+        return len(self.guests)
 
 
 def ui(overskrift: str, underskrifter:list,startTid: datetime.datetime,vær: weather, nyheter: news):
@@ -95,6 +97,7 @@ def ui(overskrift: str, underskrifter:list,startTid: datetime.datetime,vær: wea
     
 
     i = 0
+    guest_i = 0
     while True:
         i += 1
         display_surface.fill(offwhite)
@@ -111,14 +114,17 @@ def ui(overskrift: str, underskrifter:list,startTid: datetime.datetime,vær: wea
         display_surface.blit(pygame.image.load(f"png/{vær.symbol}.png"),RectSymbol)
 
         if i % 10 == 0:
-            underoverskrifter[0] = "Gjester:"
-            underoverskrifter = [
-                underoverskrifter[0],
-                "   "+guests.at(0),
-                "   "+guests.at(1),
-                "   "+guests.at(2),
-                "   "+guests.at(3)
-            ]
+            if guests.size() > 0:
+                guest_i = (guest_i + 1) % guests.size()
+                underoverskrifter[0] = "Tilstede:"
+                underoverskrifter = [
+                    underoverskrifter[0],
+                    "   "+guests.at(guest_i),
+                    "   "+guests.at(guest_i + 1),
+                    "   "+guests.at(guest_i + 2)
+                ]
+            else:
+                underoverskrifter = ["", "", "", ""]
         
         if i % 100 == 0:
             current_news = str(nyheter)
