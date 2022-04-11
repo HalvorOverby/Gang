@@ -86,7 +86,7 @@ class weather():
         if rain==2 or wind==2:
             return "På med sydvesten!"
         if wind==3 or rain==3:
-            return "⚠ALARM! Revurder å gå ut!⚠"
+            return "ALARM! Revurder å gå ut!"
         
         
     
