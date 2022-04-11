@@ -131,4 +131,4 @@ def ui(overskrift: str, underskrifter:list,startTid: datetime.datetime,vær: wea
         pygame.display.update()
         sleep(0.1)
 
-ui("God Dag",["", "", ""],datetime.datetime.now(),weather())
+ui("God Dag",["⚠ALARM! Revurder å gå ut!⚠", "", ""],datetime.datetime.now(),weather())

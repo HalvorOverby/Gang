@@ -51,9 +51,9 @@ class weather():
         #rain
         if self.rainAmount==0:
             rain=0
-        elif 0<self.rainAmount<0.2:
+        elif 0<self.rainAmount<0.8:
             rain=1
-        elif 0.2<=self.rainAmount<1.8:
+        elif 0.8<=self.rainAmount<1.8:
             rain=2
         elif 1.8<=self.rainAmount:
             rain=3
@@ -80,13 +80,13 @@ class weather():
         if rain==wind==0 and cloud==1:
             return "Det er fint vær"
         if rain==0 and wind<2:
-            return "Det er greit vær"
+            return "Det blåser litt"
         if rain==1 and wind<2:
             return "På med regnjakka!"
         if rain==2 or wind==2:
-            return "Det er ganske dårlig vær"
+            return "På med sydvesten!"
         if wind==3 or rain==3:
-            return "ALARM! Revurder å gå ut!"
+            return "⚠ALARM! Revurder å gå ut!⚠"
         
         
     
