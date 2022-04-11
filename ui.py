@@ -121,10 +121,9 @@ def ui(overskrift: str, underskrifter:list,startTid: datetime.datetime,vær: wea
                     underoverskrifter[0],
                     "   "+guests.at(guest_i),
                     "   "+guests.at(guest_i + 1),
-                    "   "+guests.at(guest_i + 2)
+                    "   "+guests.at(guest_i + 2),
+                    "   "+guests.at(guest_i + 3)
                 ]
-            else:
-                underoverskrifter = ["", "", "", ""]
         
         if i % 100 == 0:
             current_news = str(nyheter)
