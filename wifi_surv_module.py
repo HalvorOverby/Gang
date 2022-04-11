@@ -55,8 +55,6 @@ class Surveilance:
     def scan(self, command):
         proc = subprocess.Popen(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
         o, e = proc.communicate()
-        print(command)
-        print(e.decode('ascii'))
         lines = o.decode('ascii').split('\n')
         past_entries = copy.deepcopy(self.entries)
 
@@ -101,7 +99,7 @@ class Surveilance:
 
             guests.update(self.get_guest_list())
 
-            if i % 5 == 0:
+            if i % 30 == 0:
                 print(str(datetime.datetime.now()), "> Full scan")
                 self.scan(['sudo', 'nmap', '-snP', self.scan_IP + '/' + str(self.submask)])
                 self.fetch_names()
