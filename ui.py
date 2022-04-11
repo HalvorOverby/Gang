@@ -5,6 +5,7 @@ from weather import weather
 from wifi_surv_module import Surveilance
 import threading
 from news_module import news
+from math import ceil
 
 pygame.init()
 
@@ -17,7 +18,7 @@ class GuestList:
         self.guests = new
     def at(self, n):
         if len(self.guests) > n:
-            return self.guests[n % self.size()]
+            return self.guests[n]
         return ""
     def size(self):
         return len(self.guests)
@@ -120,18 +121,18 @@ def ui(overskrift: str, underskrifter:list,startTid: datetime.datetime,vær: wea
         display_surface.blit(underoverskriftfont.render(vær.weatherstatus(), True,gray,offwhite),RectWeather)
         display_surface.blit(pygame.image.load(f"png/{vær.symbol}.png"),RectSymbol)
 
-        if i % 10 == 0:
+        if i % 20 == 0:
             if guests.size() > 0:
-                guest_i = (guest_i + 1) % guests.size()
+                guest_i = (guest_i + 4) if (guest_i+4 < guests.size()) else 0
                 underoverskrifter[0] = "Tilstede:"
                 underoverskrifter = [
                     underoverskrifter[0],
                     "   "+guests.at(guest_i),
-                    "   "+guests.at(guest_i + 1),
-                    "   "+guests.at(guest_i + 2)
+                    "   "+guests.at((guest_i + 1)),
+                    "   "+guests.at((guest_i + 2)),
+                    "   "+guests.at((guest_i + 3)),
                 ]
-            else:
-                underoverskrifter = ["", "", "", ""]
+                sidetall = str((guest_i//4)+1)+" / "+str(ceil(guests.size()/3))
         
         if i % 100 == 0:
             current_news = str(nyheter)
