@@ -20,7 +20,7 @@ class GuestList:
         return ""
 
 
-def ui(overskrift: str, underskrifter:list,startTid: datetime.datetime,vær: weather):
+def ui(overskrift: str, underskrifter:list,startTid: datetime.datetime,vær: weather, nyheter: news):
     pygame.font.get_fonts()
     guests : GuestList = GuestList()
     surv = Surveilance()
@@ -63,6 +63,7 @@ def ui(overskrift: str, underskrifter:list,startTid: datetime.datetime,vær: wea
     værstatus= underoverskriftfont.render(f"{vær.weatherstatus()}°", True,gray,offwhite)
     værtemp= tittelfont.render(f"{round(vær.temp)}°", True,gray,offwhite )
     symbol=pygame.image.load(f"png/{vær.symbol}.png")
+    nyhet=underoverskriftfont.render(nyheter.overskrift,True,gray,offwhite)
 
     Recttittel=tittel.get_rect()
     Rectunderoverskrift1=underoverskrift1.get_rect()
@@ -73,6 +74,7 @@ def ui(overskrift: str, underskrifter:list,startTid: datetime.datetime,vær: wea
     RectTemp=værtemp.get_rect()
     RectWeather=værstatus.get_rect()
     RectSymbol=symbol.get_rect()
+    Rectnyhet=nyhet.get_rect()
 
     Recttittel.topleft = (marg, 0)
     Rectunderoverskrift1.topleft = (2*marg,Recttittel.bottom+marg)
@@ -83,6 +85,7 @@ def ui(overskrift: str, underskrifter:list,startTid: datetime.datetime,vær: wea
     RectWeather.topright=(X-marg,Recttittel.bottom+largeFontSize+marg+3)
     RectTemp.topleft=(RectWeather.left, Recttittel.bottom)
     RectSymbol.bottomleft=(RectTemp.right+marg,RectWeather.top)
+    Rectnyhet.bottomleft=(marg,RectWeather.bottom)
     
     
 
@@ -95,6 +98,7 @@ def ui(overskrift: str, underskrifter:list,startTid: datetime.datetime,vær: wea
         display_surface.blit(underoverskriftfont.render(underoverskrifter[1],True,gray,offwhite),Rectunderoverskrift2)
         display_surface.blit(underoverskriftfont.render(underoverskrifter[2],True,gray,offwhite),Rectunderoverskrift3)
         display_surface.blit(underoverskriftfont.render(underoverskrifter[3],True,gray,offwhite),Rectunderoverskrift4)
+        display_surface.blit(underoverskriftfont.render(nyheter.overskrift,True,gray,offwhite),Rectnyhet)
         display_surface.blit(underoverskriftfont.render(datetime.datetime.now().strftime("%H:%M"),True,gray,offwhite),Recttime)
         display_surface.blit(tittelfont.render(f"{round(vær.temp)}°", True,gray,offwhite ),RectTemp)
         display_surface.blit(underoverskriftfont.render(vær.weatherstatus(), True,gray,offwhite),RectWeather)
@@ -114,6 +118,7 @@ def ui(overskrift: str, underskrifter:list,startTid: datetime.datetime,vær: wea
             vær.updateWeather()
             if 5<datetime.datetime.now().hour<11:
                 overskrift="God Morgen"
+                vær.symbol=vær.next6hoursSymbol
             elif 11<=datetime.datetime.now().hour<18:
                 overskrift="God Dag"
             elif 18<=datetime.datetime.now().hour<22:
@@ -132,4 +137,4 @@ def ui(overskrift: str, underskrifter:list,startTid: datetime.datetime,vær: wea
         pygame.display.update()
         sleep(0.1)
 
-ui("God Dag",["", "", ""],datetime.datetime.now(),weather())
+ui("God Dag",["", "", ""],datetime.datetime.now(),weather(),news())
