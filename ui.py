@@ -17,7 +17,7 @@ class GuestList:
         self.guests = new
     def at(self, n):
         if len(self.guests) > n:
-            return self.guests[n % self.size()]
+            return self.guests[n]
         return ""
     def size(self):
         return len(self.guests)
