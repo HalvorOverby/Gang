@@ -4,7 +4,8 @@ import requests
 import json
 
 class weather():
-    url="https://api.met.no/weatherapi/locationforecast/2.0/compact?altitude=30&lat=63.4185&lon=10.4028"
+    #url="https://api.met.no/weatherapi/locationforecast/2.0/compact?altitude=30&lat=63.4185&lon=10.4028"
+    url="https://api.met.no/weatherapi/locationforecast/2.0/compact?altitude=50&lat=38.9868&lon=%20125.7519"
     headers={'User-Agent': 'Raspberry pi 3a+ gang prodject https://github.com/HalvorOverby/Gang'}
     time=""
     temp=0.0
