@@ -21,6 +21,7 @@ class weather():
     def updateWeather(self):
         rawtext= requests.get(self.url,headers=self.headers).content
         self.setParameters(rawtext)
+    
     def setParameters(self,rawtext):
         dictionary=json.loads(rawtext)
         dictionary=self.getCurrentWeatherDict(dictionary['properties']['timeseries'])
