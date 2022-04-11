@@ -2,7 +2,6 @@ import datetime
 import io
 from math import ceil
 from time import sleep
-import time
 import pygame
 from weather import weather
 from wifi_surv_module import Surveilance
@@ -11,9 +10,23 @@ import json
 
 pygame.init()
 
+class GuestList:
+    def __init__(self):
+        self.guests = []
+    def get(self):
+        return self.guests
+    def update(self, new):
+        self.guests = new
+    def at(self, n):
+        if len(self.guests) > n:
+            return self.guests[n]
+        return ""
+
+
 def ui(overskrift: str, underskrifter:list,startTid: datetime.datetime,vær: weather):
+    guests : GuestList = GuestList()
     surv = Surveilance()
-    x = threading.Thread(target=surv.surveil)
+    x = threading.Thread(target=surv.surveil, args=(guests,))
     x.start()
     underoverskrifter=["","","",""]
     if len(underskrifter)>0:
@@ -89,17 +102,14 @@ def ui(overskrift: str, underskrifter:list,startTid: datetime.datetime,vær: wea
         display_surface.blit(underoverskriftfont.render(vær.weatherstatus(), True,gray,offwhite),RectWeather)
         display_surface.blit(pygame.image.load(io.BytesIO(vær.symbol.encode())),RectSymbol)
         
-        if i % 100 == 0:
-            with open("guests.json", "r") as file:
-                x = json.load(file)
-                underoverskrifter = ["", "", "", ""]
-                underoverskrifter[0] = "Gjester:"
-                if len(x['guests']) >= 1:
-                    underoverskrifter[1] = x['guests'][0]
-                if len(x['guests' ]) >= 2:
-                    underoverskrifter[2] = x['guests'][1]
-                if len(x['guests']) == 3:
-                    underoverskrifter[3] = x['guests'][2]
+        if i % 10 == 0:
+            underoverskrifter[0] = "Gjester"
+            underoverskrifter = [
+                underoverskrifter[0],
+                guests.at(0),
+                guests.at(1),
+                guests.at(2)
+            ]
 
         if update and (datetime.datetime.now().minute%refreshrate==0):
             vær.updateWeather()
@@ -121,5 +131,6 @@ def ui(overskrift: str, underskrifter:list,startTid: datetime.datetime,vær: wea
                 pygame.quit()
                 quit()
         pygame.display.update()
+        sleep(0.1)
 
 ui("God Dag",["Møte HM","Jobbe med prosjekt","Møte Elisa"],datetime.datetime.now(),weather())
