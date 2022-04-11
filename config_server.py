@@ -33,7 +33,7 @@ def hello_world():
     for mac in people.keys():
         html_string += f"""
         <tr>
-         <th><input name={mac} type="text" value={people[mac]["name"]}></input></th>
+         <th><input name={mac} type="text" value="{people[mac]["name"]}"></input></th>
          <th>{people[mac]["ip"]}</th>
          <th>{mac}</th>
          <th>{datetime.datetime.fromtimestamp(people[mac]["last_seen"]).strftime('%Y-%m-%d %H:%M:%S')}
