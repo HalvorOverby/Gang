@@ -122,7 +122,7 @@ def ui(overskrift: str, underskrifter:list,startTid: datetime.datetime,vær: wea
                     "   "+guests.at(guest_i),
                     "   "+guests.at((guest_i + 1)),
                     "   "+guests.at((guest_i + 2)),
-                    " Side "+str((i/3)+1)+" av "+str(guests.size()//3+1)
+                    " Side "+str((guest_i/3)+1)+" av "+str(guests.size()//3+1)
                 ]
         
         if i % 100 == 0:
