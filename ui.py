@@ -45,8 +45,8 @@ def ui(overskrift: str, underskrifter:list,startTid: datetime.datetime,vær: wea
 
 
     marg=(Y/80)
-    largeFontSize=int(250)
-    smallFontSize=int(75)
+    largeFontSize=int(200)
+    smallFontSize=int(60)
 
 
     
