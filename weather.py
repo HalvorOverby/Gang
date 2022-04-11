@@ -21,6 +21,7 @@ class weather():
     def updateWeather(self):
         rawtext= requests.get(self.url,headers=self.headers).content
         self.setParameters(rawtext)
+        print("Update Weather har blitt kalt")
     
     def setParameters(self,rawtext):
         dictionary=json.loads(rawtext)
@@ -35,6 +36,7 @@ class weather():
         self.rainAmount=dictionary["data"]["next_1_hours"]["details"]['precipitation_amount']
         self.next6hoursSymbol=dictionary["data"]["next_6_hours"]["summary"]["symbol_code"]
         self.next6hoursRainAmount=dictionary["data"]["next_6_hours"]["details"]['precipitation_amount']
+        print(f"Ny temp er {self.temp}")
 
     def getCurrentWeatherDict(self, WeatherForDay: list):
         hour=datetime.now().hour

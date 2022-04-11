@@ -82,7 +82,7 @@ def ui(overskrift: str, underskrifter:list,startTid: datetime.datetime,vær: wea
     Recttime.bottomright=(X-marg*2,Y-marg)
     RectWeather.topright=(X-marg,Recttittel.bottom+2*marg+largeFontSize)
     RectTemp.topleft=(RectWeather.left, Recttittel.bottom+marg)
-    RectSymbol.bottomright=(RectWeather.right-5*marg,RectWeather.top)
+    RectSymbol.bottomright=(RectWeather.right-4*marg,RectWeather.top)
     
     
 
@@ -110,6 +110,7 @@ def ui(overskrift: str, underskrifter:list,startTid: datetime.datetime,vær: wea
             ]
 
         if update and (datetime.datetime.now().minute%refreshrate==0):
+            print("Melding og vær oppdateres")
             vær.updateWeather()
             if 5<datetime.datetime.now().hour<11:
                 overskrift="God Morgen"
@@ -131,4 +132,4 @@ def ui(overskrift: str, underskrifter:list,startTid: datetime.datetime,vær: wea
         pygame.display.update()
         sleep(0.1)
 
-ui("God Dag",["⚠ALARM! Revurder å gå ut!⚠", "", ""],datetime.datetime.now(),weather())
+ui("God Dag",["", "", ""],datetime.datetime.now(),weather())
