@@ -55,6 +55,7 @@ class Surveilance:
     def scan(self, command):
         proc = subprocess.Popen(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
         o, e = proc.communicate()
+        print(e.decode('ascii'))
         lines = o.decode('ascii').split('\n')
         past_entries = copy.deepcopy(self.entries)
 
