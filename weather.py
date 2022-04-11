@@ -71,7 +71,7 @@ class weather():
             wind=3
         
         #cloud
-        if self.cloudFraction<40:
+        if self.cloudFraction<20:
             cloud=0
         else:
             cloud=1
