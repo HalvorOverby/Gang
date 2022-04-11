@@ -1,12 +1,9 @@
 import datetime
-import io
-from math import ceil
 from time import sleep
 import pygame
 from weather import weather
 from wifi_surv_module import Surveilance
 import threading
-import json
 
 pygame.init()
 
@@ -135,4 +132,4 @@ def ui(overskrift: str, underskrifter:list,startTid: datetime.datetime,vær: wea
         pygame.display.update()
         sleep(0.1)
 
-ui("God Dag",["Møte HM","Jobbe med prosjekt","Møte Elisa"],datetime.datetime.now(),weather())
+ui("God Dag",["", "", ""],datetime.datetime.now(),weather())

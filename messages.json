@@ -1,0 +1,12 @@
+{
+    "welcome_messages": [
+        "How has your day been? Had any coffee today?",
+        "Are you hungry? Halvor could probably make you something.",
+        "You look like sparkling rose today.",
+        "Hope you have a good time visiting!"
+    ],
+
+    "goodbye_messages": [
+        ""
+    ]
+}
