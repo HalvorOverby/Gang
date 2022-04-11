@@ -106,20 +106,6 @@ def ui(overskrift: str, underskrifter:list,startTid: datetime.datetime,vær: wea
     i = 0
     guest_i = 0
     while True:
-        i += 1
-        display_surface.fill(offwhite)
-        display_surface.blit(tittelfont.render(overskrift, True, black, offwhite), Recttittel)
-        display_surface.blit(underoverskriftfont.render(underoverskrifter[0],True,gray,offwhite),Rectunderoverskrift1)
-        display_surface.blit(underoverskriftfont.render(underoverskrifter[1],True,gray,offwhite),Rectunderoverskrift2)
-        display_surface.blit(underoverskriftfont.render(underoverskrifter[2],True,gray,offwhite),Rectunderoverskrift3)
-        display_surface.blit(underoverskriftfont.render(underoverskrifter[3],True,gray,offwhite),Rectunderoverskrift4)
-        display_surface.blit(underoverskriftfont.render(underoverskrifter[4],True,gray,offwhite),Rectunderoverskrift5)
-        display_surface.blit(sidetallfont.render("",True,gray,offwhite),RectSidetall) #Skriv her HM
-        display_surface.blit(underoverskriftfont.render(current_news,True,gray,offwhite),Rectnyhet)
-        display_surface.blit(underoverskriftfont.render(datetime.datetime.now().strftime("%H:%M"),True,gray,offwhite),Recttime)
-        display_surface.blit(tittelfont.render(f"{round(vær.temp)}°", True,gray,offwhite ),RectTemp)
-        display_surface.blit(underoverskriftfont.render(vær.weatherstatus(), True,gray,offwhite),RectWeather)
-        display_surface.blit(pygame.image.load(f"png/{vær.symbol}.png"),RectSymbol)
 
         if i % 20 == 0:
             if guests.size() > 0:
@@ -133,7 +119,21 @@ def ui(overskrift: str, underskrifter:list,startTid: datetime.datetime,vær: wea
                     "   "+guests.at((guest_i + 3)),
                 ]
                 sidetall = str((guest_i//4)+1)+" / "+str(ceil(guests.size()/3))
-        
+
+        display_surface.fill(offwhite)
+        display_surface.blit(tittelfont.render(overskrift, True, black, offwhite), Recttittel)
+        display_surface.blit(underoverskriftfont.render(underoverskrifter[0],True,gray,offwhite),Rectunderoverskrift1)
+        display_surface.blit(underoverskriftfont.render(underoverskrifter[1],True,gray,offwhite),Rectunderoverskrift2)
+        display_surface.blit(underoverskriftfont.render(underoverskrifter[2],True,gray,offwhite),Rectunderoverskrift3)
+        display_surface.blit(underoverskriftfont.render(underoverskrifter[3],True,gray,offwhite),Rectunderoverskrift4)
+        display_surface.blit(underoverskriftfont.render(underoverskrifter[4],True,gray,offwhite),Rectunderoverskrift5)
+        display_surface.blit(sidetallfont.render(sidetall,True,gray,offwhite),RectSidetall) #Skriv her HM
+        display_surface.blit(underoverskriftfont.render(current_news,True,gray,offwhite),Rectnyhet)
+        display_surface.blit(underoverskriftfont.render(datetime.datetime.now().strftime("%H:%M"),True,gray,offwhite),Recttime)
+        display_surface.blit(tittelfont.render(f"{round(vær.temp)}°", True,gray,offwhite ),RectTemp)
+        display_surface.blit(underoverskriftfont.render(vær.weatherstatus(), True,gray,offwhite),RectWeather)
+        display_surface.blit(pygame.image.load(f"png/{vær.symbol}.png"),RectSymbol)
+
         if i % 100 == 0:
             current_news = str(nyheter)
 
@@ -160,6 +160,7 @@ def ui(overskrift: str, underskrifter:list,startTid: datetime.datetime,vær: wea
                 quit()
         
         pygame.display.update()
+        i += 1
         sleep(0.1)
 
 ui("God Dag",["", "", ""],datetime.datetime.now(),weather(),news())
