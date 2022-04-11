@@ -21,7 +21,6 @@ class weather():
     def updateWeather(self):
         rawtext= requests.get(self.url,headers=self.headers).content
         self.setParameters(rawtext)
-        print("Update Weather har blitt kalt")
     
     def setParameters(self,rawtext):
         dictionary=json.loads(rawtext)
