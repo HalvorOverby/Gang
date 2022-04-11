@@ -87,7 +87,7 @@ def ui(overskrift: str, underskrifter:list,startTid: datetime.datetime,vær: wea
     RectWeather.topright=(X-marg,Recttittel.bottom+largeFontSize+marg+3)
     RectTemp.topleft=(RectWeather.left, Recttittel.bottom)
     RectSymbol.bottomleft=(RectTemp.right+marg,RectWeather.top)
-    Rectnyhet.bottomleft=(marg,RectWeather.bottom)
+    Rectnyhet.bottomleft=(marg,Recttime.bottom)
     
     
 
