@@ -17,7 +17,7 @@ class GuestList:
         self.guests = new
     def at(self, n):
         if len(self.guests) > n:
-            return self.guests[n]
+            return str(n) + " " + self.guests[n]
         return ""
     def size(self):
         return len(self.guests)
@@ -120,9 +120,9 @@ def ui(overskrift: str, underskrifter:list,startTid: datetime.datetime,vær: wea
                 underoverskrifter = [
                     underoverskrifter[0],
                     "   "+guests.at(guest_i),
-                    "   "+guests.at(guest_i + 1),
-                    "   "+guests.at(guest_i + 2),
-                    "   "+guests.at(guest_i + 3)
+                    "   "+guests.at((guest_i + 1) % guests.size()) if guests.size() > 1 else "",
+                    "   "+guests.at((guest_i + 2) % guests.size()) if guests.size() > 2 else "",
+                    "   "+guests.at((guest_i + 3) % guests.size()) if guests.size() > 3 else ""
                 ]
         
         if i % 100 == 0:
