@@ -45,8 +45,8 @@ def ui(overskrift: str, underskrifter:list,startTid: datetime.datetime,vær: wea
 
 
     marg=(Y/80)
-    largeFontSize=int(X*13/108)
-    smallFontSize=int(Y*7/108)
+    largeFontSize=int(250)
+    smallFontSize=int(75)
 
 
     
@@ -82,7 +82,7 @@ def ui(overskrift: str, underskrifter:list,startTid: datetime.datetime,vær: wea
     Recttime.bottomright=(X-marg*2,Y-marg)
     RectWeather.topright=(X-marg,Recttittel.bottom+largeFontSize+marg+3)
     RectTemp.topleft=(RectWeather.left, Recttittel.bottom)
-    RectSymbol.bottomright=(RectWeather.right-4*marg,RectWeather.top)
+    RectSymbol.bottomleft=(RectTemp.right+marg,RectWeather.top)
     
     
 
@@ -98,7 +98,7 @@ def ui(overskrift: str, underskrifter:list,startTid: datetime.datetime,vær: wea
         display_surface.blit(underoverskriftfont.render(datetime.datetime.now().strftime("%H:%M"),True,gray,offwhite),Recttime)
         display_surface.blit(tittelfont.render(f"{round(vær.temp)}°", True,gray,offwhite ),RectTemp)
         display_surface.blit(underoverskriftfont.render(vær.weatherstatus(), True,gray,offwhite),RectWeather)
-        display_surface.blit(pygame.transform.scale(pygame.image.load(f"png/{vær.symbol}.png"),(largeFontSize,largeFontSize)),RectSymbol)
+        display_surface.blit(pygame.image.load(f"png/{vær.symbol}.png"),RectSymbol)
 
         if i % 10 == 0:
             underoverskrifter[0] = "Gjester:"
