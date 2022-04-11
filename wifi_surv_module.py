@@ -99,7 +99,7 @@ class Surveilance:
 
             guests.update(self.get_guest_list())
 
-            if i % 60 == 0:
+            if i % 5 == 0:
                 print(str(datetime.datetime.now()), "> Full scan")
                 self.scan(['sudo', 'nmap', '-snP', self.scan_IP + '/' + str(self.submask)])
                 self.fetch_names()
