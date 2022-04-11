@@ -17,7 +17,7 @@ class GuestList:
         self.guests = new
     def at(self, n):
         if len(self.guests) > n:
-            return str(n) + " " + self.guests[n]
+            return self.guests[n]
         return ""
     def size(self):
         return len(self.guests)
@@ -115,14 +115,14 @@ def ui(overskrift: str, underskrifter:list,startTid: datetime.datetime,vær: wea
 
         if i % 10 == 0:
             if guests.size() > 0:
-                guest_i = (guest_i + 4) if (guest_i+4 < guests.size()) else 0
+                guest_i = (guest_i + 3) if (guest_i+3 < guests.size()) else 0
                 underoverskrifter[0] = "Tilstede:"
                 underoverskrifter = [
                     underoverskrifter[0],
                     "   "+guests.at(guest_i),
                     "   "+guests.at((guest_i + 1)),
                     "   "+guests.at((guest_i + 2)),
-                    "   "+guests.at((guest_i + 3))
+                    " Side "+((i/3)+1)+" av "+(guests.size()//3+1)
                 ]
         
         if i % 100 == 0:
