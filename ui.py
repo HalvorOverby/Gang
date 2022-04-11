@@ -27,9 +27,9 @@ def ui(overskrift: str, underskrifter:list,startTid: datetime.datetime,vær: wea
     surv = Surveilance()
     x = threading.Thread(target=surv.surveil, args=(guests,))
     x.start()
-    underoverskrifter=["","","",""]
+    underoverskrifter=["","","","",""]
     if len(underskrifter)>0:
-        for i in range(min(len(underskrifter),4)):
+        for i in range(min(len(underskrifter),5)):
             underoverskrifter[i]=underskrifter[i]
 
     refreshrate=30#every x minute
@@ -61,6 +61,7 @@ def ui(overskrift: str, underskrifter:list,startTid: datetime.datetime,vær: wea
     underoverskrift2= underoverskriftfont.render(underoverskrifter[1],True,gray,offwhite)
     underoverskrift3= underoverskriftfont.render(underoverskrifter[2],True,gray,offwhite)
     underoverskrift4= underoverskriftfont.render(underoverskrifter[3],True,gray,offwhite)
+    underoverskrift5= underoverskriftfont.render(underoverskrifter[4],True,gray,offwhite) 
     time=underoverskriftfont.render(startTid.strftime("%H:%M"),True,gray,offwhite)
     værstatus= underoverskriftfont.render(f"{vær.weatherstatus()}°", True,gray,offwhite)
     værtemp= tittelfont.render(f"{round(vær.temp)}°", True,gray,offwhite )
@@ -72,6 +73,7 @@ def ui(overskrift: str, underskrifter:list,startTid: datetime.datetime,vær: wea
     Rectunderoverskrift2=underoverskrift2.get_rect()
     Rectunderoverskrift3=underoverskrift3.get_rect()
     Rectunderoverskrift4=underoverskrift4.get_rect()
+    Rectunderoverskrift5=underoverskrift5.get_rect() 
     Recttime=time.get_rect()
     RectTemp=værtemp.get_rect()
     RectWeather=værstatus.get_rect()
@@ -83,6 +85,7 @@ def ui(overskrift: str, underskrifter:list,startTid: datetime.datetime,vær: wea
     Rectunderoverskrift2.topleft = (2*marg,Rectunderoverskrift1.bottom+marg) #3*marg+largeFontSize+smallFontSize
     Rectunderoverskrift3.topleft = (2*marg,Rectunderoverskrift2.bottom+marg)
     Rectunderoverskrift4.topleft = (2*marg,Rectunderoverskrift3.bottom+marg)
+    Rectunderoverskrift5.topleft = (2*marg,Rectunderoverskrift4.bottom+marg)
     Recttime.bottomright=(X-marg*2,Y-marg)
     RectWeather.topright=(X-marg,Recttittel.bottom+largeFontSize+marg+3)
     RectTemp.topleft=(RectWeather.left, Recttittel.bottom)
@@ -100,6 +103,7 @@ def ui(overskrift: str, underskrifter:list,startTid: datetime.datetime,vær: wea
         display_surface.blit(underoverskriftfont.render(underoverskrifter[1],True,gray,offwhite),Rectunderoverskrift2)
         display_surface.blit(underoverskriftfont.render(underoverskrifter[2],True,gray,offwhite),Rectunderoverskrift3)
         display_surface.blit(underoverskriftfont.render(underoverskrifter[3],True,gray,offwhite),Rectunderoverskrift4)
+        display_surface.blit(underoverskriftfont.render(underoverskrifter[4],True,gray,offwhite),Rectunderoverskrift5)
         display_surface.blit(underoverskriftfont.render(current_news,True,gray,offwhite),Rectnyhet)
         display_surface.blit(underoverskriftfont.render(datetime.datetime.now().strftime("%H:%M"),True,gray,offwhite),Recttime)
         display_surface.blit(tittelfont.render(f"{round(vær.temp)}°", True,gray,offwhite ),RectTemp)
@@ -112,7 +116,8 @@ def ui(overskrift: str, underskrifter:list,startTid: datetime.datetime,vær: wea
                 underoverskrifter[0],
                 "   "+guests.at(0),
                 "   "+guests.at(1),
-                "   "+guests.at(2)
+                "   "+guests.at(2),
+                "   "+guests.at(3)
             ]
         
         if i % 100 == 0:
