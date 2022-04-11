@@ -115,7 +115,7 @@ def ui(overskrift: str, underskrifter:list,startTid: datetime.datetime,vær: wea
 
         if i % 10 == 0:
             if guests.size() > 0:
-                guest_i = (guest_i + 4) % guests.size()
+                guest_i = (guest_i + 4) if (guest_i+4 < guests.size()) else 0
                 underoverskrifter[0] = "Tilstede:"
                 underoverskrifter = [
                     underoverskrifter[0],
