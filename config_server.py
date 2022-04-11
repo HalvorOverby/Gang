@@ -26,6 +26,7 @@ def hello_world():
        <th>Navn</th>
        <th>IP</th>
        <th>MAC</th>
+       <th>First seen</th>
        <th>Last seen</th>
       </tr>
     """
@@ -36,6 +37,7 @@ def hello_world():
          <th><input name={mac} type="text" value="{people[mac]["name"]}"></input></th>
          <th>{people[mac]["ip"]}</th>
          <th>{mac}</th>
+         <th>{datetime.datetime.fromtimestamp(people[mac]["first_seen"]).strftime('%Y-%m-%d %H:%M:%S')}</th>
          <th>{datetime.datetime.fromtimestamp(people[mac]["last_seen"]).strftime('%Y-%m-%d %H:%M:%S')}
         </tr>
         """
