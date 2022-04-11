@@ -19,5 +19,3 @@ class news:
         return self.news[self.i]
 
 nyheter = news()
-for i in range(20):
-    print(nyheter)

@@ -4,6 +4,7 @@ import pygame
 from weather import weather
 from wifi_surv_module import Surveilance
 import threading
+from news_module import news
 
 pygame.init()
 
@@ -33,6 +34,7 @@ def ui(overskrift: str, underskrifter:list,startTid: datetime.datetime,vær: wea
 
     refreshrate=30#every x minute
     update=True
+    current_news = str(nyheter)
 
 
     white = (255, 255, 255)
@@ -63,7 +65,7 @@ def ui(overskrift: str, underskrifter:list,startTid: datetime.datetime,vær: wea
     værstatus= underoverskriftfont.render(f"{vær.weatherstatus()}°", True,gray,offwhite)
     værtemp= tittelfont.render(f"{round(vær.temp)}°", True,gray,offwhite )
     symbol=pygame.image.load(f"png/{vær.symbol}.png")
-    nyhet=underoverskriftfont.render(nyheter.overskrift,True,gray,offwhite)
+    nyhet=underoverskriftfont.render(current_news,True,gray,offwhite)
 
     Recttittel=tittel.get_rect()
     Rectunderoverskrift1=underoverskrift1.get_rect()
@@ -98,7 +100,7 @@ def ui(overskrift: str, underskrifter:list,startTid: datetime.datetime,vær: wea
         display_surface.blit(underoverskriftfont.render(underoverskrifter[1],True,gray,offwhite),Rectunderoverskrift2)
         display_surface.blit(underoverskriftfont.render(underoverskrifter[2],True,gray,offwhite),Rectunderoverskrift3)
         display_surface.blit(underoverskriftfont.render(underoverskrifter[3],True,gray,offwhite),Rectunderoverskrift4)
-        display_surface.blit(underoverskriftfont.render(nyheter.overskrift,True,gray,offwhite),Rectnyhet)
+        display_surface.blit(underoverskriftfont.render(current_news,True,gray,offwhite),Rectnyhet)
         display_surface.blit(underoverskriftfont.render(datetime.datetime.now().strftime("%H:%M"),True,gray,offwhite),Recttime)
         display_surface.blit(tittelfont.render(f"{round(vær.temp)}°", True,gray,offwhite ),RectTemp)
         display_surface.blit(underoverskriftfont.render(vær.weatherstatus(), True,gray,offwhite),RectWeather)
@@ -112,11 +114,14 @@ def ui(overskrift: str, underskrifter:list,startTid: datetime.datetime,vær: wea
                 "   "+guests.at(1),
                 "   "+guests.at(2)
             ]
+        
+        if i % 100 == 0:
+            current_news = str(nyheter)
 
         if update and (datetime.datetime.now().minute%refreshrate==0):
             print("Melding og vær oppdateres")
             vær.updateWeather()
-            news.updateNews()
+            nyheter.updateNews()
             if 5<datetime.datetime.now().hour<11:
                 overskrift="God Morgen"
                 vær.symbol=vær.next6hoursSymbol
