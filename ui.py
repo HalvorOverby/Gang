@@ -113,7 +113,7 @@ def ui(overskrift: str, underskrifter:list,startTid: datetime.datetime,vær: wea
         display_surface.blit(underoverskriftfont.render(vær.weatherstatus(), True,gray,offwhite),RectWeather)
         display_surface.blit(pygame.image.load(f"png/{vær.symbol}.png"),RectSymbol)
 
-        if i % 10 == 0:
+        if i % 20 == 0:
             if guests.size() > 0:
                 guest_i = (guest_i + 3) if (guest_i+3 < guests.size()) else 0
                 underoverskrifter[0] = "Tilstede:"
@@ -122,7 +122,7 @@ def ui(overskrift: str, underskrifter:list,startTid: datetime.datetime,vær: wea
                     "   "+guests.at(guest_i),
                     "   "+guests.at((guest_i + 1)),
                     "   "+guests.at((guest_i + 2)),
-                    " Side "+str((guest_i/3)+1)+" av "+str(guests.size()//3+1)
+                    str((guest_i//3)+1)+" / "+str(guests.size()//3+1)
                 ]
         
         if i % 100 == 0:
