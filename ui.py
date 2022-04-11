@@ -24,6 +24,7 @@ class GuestList:
 
 
 def ui(overskrift: str, underskrifter:list,startTid: datetime.datetime,vær: weather):
+    pygame.font.get_fonts()
     guests : GuestList = GuestList()
     surv = Surveilance()
     x = threading.Thread(target=surv.surveil, args=(guests,))
