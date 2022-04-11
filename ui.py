@@ -31,7 +31,7 @@ def ui(overskrift: str, underskrifter:list,startTid: datetime.datetime,vær: wea
         for i in range(min(len(underskrifter),4)):
             underoverskrifter[i]=underskrifter[i]
 
-    refreshrate=2#every x minute
+    refreshrate=30#every x minute
     update=True
 
 
