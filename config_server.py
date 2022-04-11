@@ -1,12 +1,23 @@
-from flask import Flask
+from flask import Flask, request, redirect
 import json
 import datetime
-from flask import request
-
+import subprocess
+import sys
 app = Flask(__name__)
 
+@app.route("/say", methods= ['POST'])
+def say():
+    data = request.form.to_dict()["speech"]
+    print()
+    if sys.platform == 'linux':
+        command = ["espeak", "-v", "mb-en1", f'" - ... - {data}"', "-p65", "-s180"]
+    elif sys.platform == 'darwin':
+        command = ["say", f'" - ... - {data}"']
+    subprocess.Popen(command)
+    return redirect("/")
+
 @app.route("/", methods = ['GET', 'POST'])
-def hello_world():
+def main():
     with open("people.json", "r") as file:
         people = json.load(file)
 
@@ -44,6 +55,10 @@ def hello_world():
     html_string += """
       </table>
       <button type="submit">Lagre</button>
+     </form>
+     <h1>Make the screen say something</h1>
+     <form action="/say" method="post">
+     What should the screen say: <input type="text" name="speech"></input>
      </form>
     </body>
     """
