@@ -104,9 +104,9 @@ def ui(overskrift: str, underskrifter:list,startTid: datetime.datetime,vær: wea
             underoverskrifter[0] = "Gjester:"
             underoverskrifter = [
                 underoverskrifter[0],
-                "\t"+guests.at(0),
-                "\t"+guests.at(1),
-                "\t"+guests.at(2)
+                "   "+guests.at(0),
+                "   "+guests.at(1),
+                "   "+guests.at(2)
             ]
 
         if update and (datetime.datetime.now().minute%refreshrate==0):
