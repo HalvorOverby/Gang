@@ -37,7 +37,7 @@ class Surveilance:
     def say(self, text):
         print("Speaking / Holding thread")
         if sys.platform == 'linux':
-            command = ["espeak", "-v", "mb-en1", f'" - ... - {text}"', "-p65", "-s180"]
+            command = ["espeak", "-v", "mb-en1", f'" - ... - {text}"', "-p65", "-s120"]
         elif sys.platform == 'darwin':
             command = ["say", f'" - ... - {text}"']
         subprocess.run(command)

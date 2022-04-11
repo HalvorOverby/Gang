@@ -10,7 +10,7 @@ def say():
     data = request.form.to_dict()["speech"]
     print()
     if sys.platform == 'linux':
-        command = ["espeak", "-v", "mb-en1", f'" - ... - {data}"', "-p65", "-s180"]
+        command = ["espeak", "-v", "mb-en1", f'" - ... - {data}"', "-p65", "-s120"]
     elif sys.platform == 'darwin':
         command = ["say", f'" - ... - {data}"']
     subprocess.Popen(command)
