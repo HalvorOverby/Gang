@@ -80,15 +80,15 @@ class weather():
         if rain==wind==cloud==0:
             return "Det er nydelig vær"
         if rain==wind==0 and cloud==1:
-            return "Det er fint vær"
+            return "Det er fint vær   "
         if rain==0 and wind<2:
-            return "Det blåser litt"
+            return "Det blåser litt   "
         if rain==1 and wind<2:
-            return "På med regnjakka!"
+            return "På med regnjakka! "
         if rain==2 or wind==2:
-            return "På med sydvesten!"
+            return "På med sydvesten! "
         if wind==3 or rain==3:
-            return "ALARM! Revurder å gå ut!"
+            return "ALARM! Bli inne!  "
         
         
     
