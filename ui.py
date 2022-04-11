@@ -101,12 +101,12 @@ def ui(overskrift: str, underskrifter:list,startTid: datetime.datetime,vær: wea
         display_surface.blit(pygame.image.load(f"png/{vær.symbol}.png"),RectSymbol)
         
         if i % 10 == 0:
-            underoverskrifter[0] = "Gjester"
+            underoverskrifter[0] = "Gjester:"
             underoverskrifter = [
                 underoverskrifter[0],
-                guests.at(0),
-                guests.at(1),
-                guests.at(2)
+                "\t"+guests.at(0),
+                "\t"+guests.at(1),
+                "\t"+guests.at(2)
             ]
 
         if update and (datetime.datetime.now().minute%refreshrate==0):
