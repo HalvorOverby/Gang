@@ -105,8 +105,9 @@ def ui(overskrift: str, underskrifter:list,startTid: datetime.datetime,vær: wea
 
     i = 0
     guest_i = 0
+    sidetall = ""
     while True:
-
+    
         if i % 20 == 0:
             if guests.size() > 0:
                 guest_i = (guest_i + 4) if (guest_i+4 < guests.size()) else 0
