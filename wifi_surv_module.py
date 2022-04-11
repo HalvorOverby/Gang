@@ -6,6 +6,7 @@ import time
 import json
 import copy
 import random
+import sys
 class Surveilance:
     def __init__(self):
         self.mac = MacLookup()
@@ -29,7 +30,10 @@ class Surveilance:
             self.entries = {}
 
     def say(self, text):
-        command = ["espeak", "-v", "mb-en1", f'" - ... - {text}"', "-p65", "-s180"]
+        if sys.platform == 'linux':
+            command = ["espeak", "-v", "mb-en1", f'" - ... - {text}"', "-p65", "-s180"]
+        elif sys.platform == 'darwin':
+            command = ["say", f'" - ... - {text}"']
         subprocess.run(command)
 
     def welcome_message(self, mac):
@@ -76,7 +80,7 @@ class Surveilance:
         except:
             pass
 
-    def surveil(self):
+    def surveil(self, guests):
         while True:
             if self.i % 60 == 0:
                 print(str(datetime.datetime.now()), "> Full scan")
@@ -93,11 +97,11 @@ class Surveilance:
                 self.get_guest_list()
                 print(str(datetime.datetime.now()), "> Updating names")
                 self.fetch_names()
+                guests.update(self.get_guest_list())
             print(str(datetime.datetime.now()), "> Completed iteration")
             self.i += 1
             time.sleep(2)
+            
 
     def get_guest_list(self):
-        with open("guests.json", "w") as file:
-            J = json.dumps({'guests': [self.entries[mac]["name"] for mac in self.here_now if self.entries[mac]["name"]]})
-            file.write(J)
+        return [self.entries[mac]["name"] for mac in self.here_now if self.entries[mac]["name"]]
