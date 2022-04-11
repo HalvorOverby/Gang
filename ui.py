@@ -40,8 +40,8 @@ def ui(overskrift: str, underskrifter:list,startTid: datetime.datetime,vær: wea
     black= (0,0,0)
     gray= (116,118,136)
     
-    X = 1200   
-    Y = 675
+    X = 1920   
+    Y = 1020
 
 
     marg=(Y/80)
