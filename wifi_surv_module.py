@@ -11,7 +11,7 @@ class Surveilance:
         self.mac = MacLookup()
         self.here_now = set()
 
-        proc = subprocess.Popen(["ifconfig", "en0"], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+        proc = subprocess.Popen(["ifconfig", "wlan0"], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
         o, e = proc.communicate()
         output = o.decode('ascii').split("\n")
         for line in output:
