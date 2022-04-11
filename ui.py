@@ -80,7 +80,7 @@ def ui(overskrift: str, underskrifter:list,startTid: datetime.datetime,vær: wea
     Rectunderoverskrift3.topleft = (2*marg,Rectunderoverskrift2.bottom+marg)
     Rectunderoverskrift4.topleft = (2*marg,Rectunderoverskrift3.bottom+marg)
     Recttime.bottomright=(X-marg*2,Y-marg)
-    RectWeather.topright=(X-marg,Recttittel.bottom+marg+largeFontSize)
+    RectWeather.topright=(X-marg,Recttittel.bottom+largeFontSize+marg+3)
     RectTemp.topleft=(RectWeather.left, Recttittel.bottom)
     RectSymbol.bottomright=(RectWeather.right-4*marg,RectWeather.top)
     
@@ -98,8 +98,8 @@ def ui(overskrift: str, underskrifter:list,startTid: datetime.datetime,vær: wea
         display_surface.blit(underoverskriftfont.render(datetime.datetime.now().strftime("%H:%M"),True,gray,offwhite),Recttime)
         display_surface.blit(tittelfont.render(f"{round(vær.temp)}°", True,gray,offwhite ),RectTemp)
         display_surface.blit(underoverskriftfont.render(vær.weatherstatus(), True,gray,offwhite),RectWeather)
-        display_surface.blit(pygame.image.load(f"png/{vær.symbol}.png"),RectSymbol)
-        
+        display_surface.blit(pygame.transform.scale(pygame.image.load(f"png/{vær.symbol}.png"),(largeFontSize,largeFontSize)),RectSymbol)
+
         if i % 10 == 0:
             underoverskrifter[0] = "Gjester:"
             underoverskrifter = [
@@ -124,11 +124,11 @@ def ui(overskrift: str, underskrifter:list,startTid: datetime.datetime,vær: wea
         if datetime.datetime.now().minute%refreshrate==1:
             update=True
 
-
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 pygame.quit()
                 quit()
+        
         pygame.display.update()
         sleep(0.1)
 
