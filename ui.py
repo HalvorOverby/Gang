@@ -93,7 +93,7 @@ def ui(overskrift: str, underskrifter:list,startTid: datetime.datetime,vær: wea
     Rectunderoverskrift3.topleft = (2*marg,Rectunderoverskrift2.bottom+marg)
     Rectunderoverskrift4.topleft = (2*marg,Rectunderoverskrift3.bottom+marg)
     Rectunderoverskrift5.topleft = (2*marg,Rectunderoverskrift4.bottom+marg)
-    RectSidetall.topright=(max(Rectunderoverskrift0.right,Rectunderoverskrift1.right,Rectunderoverskrift2.right,Rectunderoverskrift3.right,Rectunderoverskrift4.right),Rectunderoverskrift5.bottom+marg)
+    RectSidetall.topright=(max(Rectunderoverskrift1.right,Rectunderoverskrift2.right,Rectunderoverskrift3.right,Rectunderoverskrift4.right,Rectunderoverskrift5.right),Rectunderoverskrift5.bottom+marg)
     Recttime.bottomright=(X-marg*2,Y-marg)
     RectWeather.topright=(X-marg,Recttittel.bottom+largeFontSize+marg+3)
     RectTemp.topleft=(RectWeather.left, Recttittel.bottom)
