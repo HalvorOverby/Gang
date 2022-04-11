@@ -3,10 +3,6 @@ from webbrowser import Elinks
 import requests
 import json
 
-
-def symbolNameToSVG(symbolName: str):
-    with open(f"icons/{symbolName}.svg", 'r') as line:
-	    return line.read()
 class weather():
     url="https://api.met.no/weatherapi/locationforecast/2.0/compact?altitude=30&lat=63.4185&lon=10.4028"
     headers={'User-Agent': 'Raspberry pi 3a+ gang prodject https://github.com/HalvorOverby/Gang'}
@@ -34,9 +30,9 @@ class weather():
         self.cloudFraction=dictionary["data"]["instant"]["details"]["cloud_area_fraction"]
         self.windDirection=dictionary["data"]["instant"]["details"]['wind_from_direction']
         self.windSpeed=dictionary["data"]["instant"]["details"]["wind_speed"]
-        self.symbol=symbolNameToSVG(dictionary["data"]["next_1_hours"]["summary"]["symbol_code"])
+        self.symbol=dictionary["data"]["next_1_hours"]["summary"]["symbol_code"]
         self.rainAmount=dictionary["data"]["next_1_hours"]["details"]['precipitation_amount']
-        self.next6hoursSymbol=symbolNameToSVG(dictionary["data"]["next_6_hours"]["summary"]["symbol_code"])
+        self.next6hoursSymbol=dictionary["data"]["next_6_hours"]["summary"]["symbol_code"]
         self.next6hoursRainAmount=dictionary["data"]["next_6_hours"]["details"]['precipitation_amount']
 
     def getCurrentWeatherDict(self, WeatherForDay: list):

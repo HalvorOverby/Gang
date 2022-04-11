@@ -64,7 +64,7 @@ def ui(overskrift: str, underskrifter:list,startTid: datetime.datetime,vær: wea
     time=underoverskriftfont.render(startTid.strftime("%H:%M"),True,gray,offwhite)
     værstatus= underoverskriftfont.render(f"{vær.weatherstatus()}°", True,gray,offwhite)
     værtemp= tittelfont.render(f"{round(vær.temp)}°", True,gray,offwhite )
-    symbol=pygame.image.load(io.BytesIO(vær.symbol.encode()))
+    symbol=pygame.image.load(f"icons/{vær.symbol}.svg")
 
     Recttittel=tittel.get_rect()
     Rectunderoverskrift1=underoverskrift1.get_rect()
@@ -100,7 +100,7 @@ def ui(overskrift: str, underskrifter:list,startTid: datetime.datetime,vær: wea
         display_surface.blit(underoverskriftfont.render(datetime.datetime.now().strftime("%H:%M"),True,gray,offwhite),Recttime)
         display_surface.blit(tittelfont.render(f"{round(vær.temp)}°", True,gray,offwhite ),RectTemp)
         display_surface.blit(underoverskriftfont.render(vær.weatherstatus(), True,gray,offwhite),RectWeather)
-        display_surface.blit(pygame.image.load(io.BytesIO(vær.symbol.encode())),RectSymbol)
+        display_surface.blit(pygame.image.load(f"icons/{vær.symbol}.svg"),RectSymbol)
         
         if i % 10 == 0:
             underoverskrifter[0] = "Gjester"
