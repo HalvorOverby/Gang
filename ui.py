@@ -1,4 +1,5 @@
 import datetime
+import io
 from math import ceil
 from time import sleep
 import time
@@ -28,8 +29,8 @@ def ui(overskrift: str, underskrifter:list,startTid: datetime.datetime,vær: wea
     black= (0,0,0)
     gray= (116,118,136)
     
-    X = 1920   
-    Y = 1020
+    X = 1200   
+    Y = 675
 
 
     marg=(Y/80)
@@ -50,6 +51,7 @@ def ui(overskrift: str, underskrifter:list,startTid: datetime.datetime,vær: wea
     time=underoverskriftfont.render(startTid.strftime("%H:%M"),True,gray,offwhite)
     værstatus= underoverskriftfont.render(f"{vær.weatherstatus()}°", True,gray,offwhite)
     værtemp= tittelfont.render(f"{round(vær.temp)}°", True,gray,offwhite )
+    symbol=pygame.image.load(io.BytesIO(vær.symbol.encode()))
 
     Recttittel=tittel.get_rect()
     Rectunderoverskrift1=underoverskrift1.get_rect()
@@ -59,6 +61,7 @@ def ui(overskrift: str, underskrifter:list,startTid: datetime.datetime,vær: wea
     Recttime=time.get_rect()
     RectTemp=værtemp.get_rect()
     RectWeather=værstatus.get_rect()
+    RectSymbol=symbol.get_rect()
 
     Recttittel.topleft = (marg, marg)
     Rectunderoverskrift1.topleft = (2*marg,Recttittel.bottom+marg)
@@ -68,6 +71,7 @@ def ui(overskrift: str, underskrifter:list,startTid: datetime.datetime,vær: wea
     Recttime.bottomright=(X-marg*2,Y-marg)
     RectWeather.topright=(X-marg,Recttittel.bottom+2*marg+largeFontSize)
     RectTemp.topleft=(RectWeather.left, Recttittel.bottom+marg)
+    RectSymbol.bottomleft=(RectTemp.right,RectWeather.top)
     
     
 
@@ -83,6 +87,7 @@ def ui(overskrift: str, underskrifter:list,startTid: datetime.datetime,vær: wea
         display_surface.blit(underoverskriftfont.render(datetime.datetime.now().strftime("%H:%M"),True,gray,offwhite),Recttime)
         display_surface.blit(tittelfont.render(f"{round(vær.temp)}°", True,gray,offwhite ),RectTemp)
         display_surface.blit(underoverskriftfont.render(vær.weatherstatus(), True,gray,offwhite),RectWeather)
+        display_surface.blit(pygame.image.load(io.BytesIO(vær.symbol.encode())),RectSymbol)
         
         if i % 100 == 0:
             with open("guests.json", "r") as file:
