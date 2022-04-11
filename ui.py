@@ -51,12 +51,14 @@ def ui(overskrift: str, underskrifter:list,startTid: datetime.datetime,vær: wea
     marg=(Y/80)
     largeFontSize=int(200)
     smallFontSize=int(60)
+    pageFontSize=30
 
 
     
     display_surface = pygame.display.set_mode((X, Y))
     tittelfont = pygame.font.SysFont("poppins", largeFontSize)
     underoverskriftfont= pygame.font.SysFont("poppins",smallFontSize)
+    sidetallfont=pygame.font.SysFont("poppins",pageFontSize)
     
     tittel = tittelfont.render(overskrift, True, black, offwhite)
     underoverskrift1= underoverskriftfont.render(underoverskrifter[0],True,gray,offwhite)
@@ -69,6 +71,7 @@ def ui(overskrift: str, underskrifter:list,startTid: datetime.datetime,vær: wea
     værtemp= tittelfont.render(f"{round(vær.temp)}°", True,gray,offwhite )
     symbol=pygame.image.load(f"png/{vær.symbol}.png")
     nyhet=underoverskriftfont.render(current_news,True,gray,offwhite)
+    sidetall=sidetallfont.render("",True,gray,offwhite)
 
     Recttittel=tittel.get_rect()
     Rectunderoverskrift1=underoverskrift1.get_rect()
@@ -81,6 +84,7 @@ def ui(overskrift: str, underskrifter:list,startTid: datetime.datetime,vær: wea
     RectWeather=værstatus.get_rect()
     RectSymbol=symbol.get_rect()
     Rectnyhet=nyhet.get_rect()
+    RectSidetall=sidetall.get_rect()
 
     Recttittel.topleft = (marg, 0)
     Rectunderoverskrift1.topleft = (2*marg,Recttittel.bottom+marg)
@@ -88,11 +92,13 @@ def ui(overskrift: str, underskrifter:list,startTid: datetime.datetime,vær: wea
     Rectunderoverskrift3.topleft = (2*marg,Rectunderoverskrift2.bottom+marg)
     Rectunderoverskrift4.topleft = (2*marg,Rectunderoverskrift3.bottom+marg)
     Rectunderoverskrift5.topleft = (2*marg,Rectunderoverskrift4.bottom+marg)
+    RectSidetall.topright=(max(Rectunderoverskrift0.right,Rectunderoverskrift1.right,Rectunderoverskrift2.right,Rectunderoverskrift3.right,Rectunderoverskrift4.right),Rectunderoverskrift5.bottom+marg)
     Recttime.bottomright=(X-marg*2,Y-marg)
     RectWeather.topright=(X-marg,Recttittel.bottom+largeFontSize+marg+3)
     RectTemp.topleft=(RectWeather.left, Recttittel.bottom)
     RectSymbol.bottomleft=(RectTemp.right+marg,RectWeather.top)
     Rectnyhet.bottomleft=(marg,Recttime.bottom)
+    
     
     
 
@@ -107,6 +113,7 @@ def ui(overskrift: str, underskrifter:list,startTid: datetime.datetime,vær: wea
         display_surface.blit(underoverskriftfont.render(underoverskrifter[2],True,gray,offwhite),Rectunderoverskrift3)
         display_surface.blit(underoverskriftfont.render(underoverskrifter[3],True,gray,offwhite),Rectunderoverskrift4)
         display_surface.blit(underoverskriftfont.render(underoverskrifter[4],True,gray,offwhite),Rectunderoverskrift5)
+        display_surface.blit(sidetallfont.render("",True,gray,offwhite),RectSidetall) #Skriv her HM
         display_surface.blit(underoverskriftfont.render(current_news,True,gray,offwhite),Rectnyhet)
         display_surface.blit(underoverskriftfont.render(datetime.datetime.now().strftime("%H:%M"),True,gray,offwhite),Recttime)
         display_surface.blit(tittelfont.render(f"{round(vær.temp)}°", True,gray,offwhite ),RectTemp)
