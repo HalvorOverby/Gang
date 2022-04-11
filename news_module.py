@@ -16,6 +16,6 @@ class news:
 
     def __str__(self):
         self.i = (self.i + 1) % len(self.news)
-        return self.news[self.i]
+        return "nrk.no: " + self.news[self.i]
 
 nyheter = news()
