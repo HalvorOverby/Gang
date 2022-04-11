@@ -23,7 +23,6 @@ class weather():
         self.setParameters(rawtext)
     def setParameters(self,rawtext):
         dictionary=json.loads(rawtext)
-        
         dictionary=self.getCurrentWeatherDict(dictionary['properties']['timeseries'])
 
         self.time=dictionary["time"]
@@ -40,7 +39,10 @@ class weather():
         hour=datetime.now().hour
         if datetime.now().minute>30:
             hour+=1
-        currentTime=f"{datetime.now().date()}T{hour}:00:00Z"    
+        if hour<10:
+            currentTime=f"{datetime.now().date()}T0{hour}:00:00Z"
+        else:
+            currentTime=f"{datetime.now().date()}T{hour}:00:00Z"
         for WeatherAtTime in WeatherForDay:
             if WeatherAtTime['time'] == currentTime:
                 return WeatherAtTime
@@ -90,4 +92,6 @@ class weather():
     
     def __str__(self):
         return f"Tid\t\t{self.time}\nTemp\t\t{self.temp}\nSkydekke\t{self.cloudFraction}\nVindVinkel\t{self.windDirection}\nVindHastighet\t{self.windSpeed}\nSymbol\t\t{self.symbol}\nRegnmengde\t{self.rainAmount}\nSymbol6\t\t{self.next6hoursSymbol}\nRegnmengde6\t{self.next6hoursRainAmount}"
-
+vear=weather()
+print(vear.symbol)
+print(vear.next6hoursSymbol)
