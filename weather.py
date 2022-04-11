@@ -4,20 +4,21 @@ import requests
 import json
 
 class weather():
-    url="https://api.met.no/weatherapi/locationforecast/2.0/compact?altitude=30&lat=63.4185&lon=10.4028"
-    headers={'User-Agent': 'Raspberry pi 3a+ gang prodject https://github.com/HalvorOverby/Gang'}
-    time=""
-    temp=0.0
-    cloudFraction=0.0
-    windDirection=0
-    windSpeed=0
-    symbol=""
-    rainAmount=""
-    next6hoursSymbol=""
-    next6hoursRainAmount=""
 
     def __init__(self):
+        self.url="https://api.met.no/weatherapi/locationforecast/2.0/compact?altitude=30&lat=63.4185&lon=10.4028"
+        self.headers={'User-Agent': 'Raspberry pi 3a+ gang prodject https://github.com/HalvorOverby/Gang'}
+        self.time=""
+        self.temp=0.0
+        self.cloudFraction=0.0
+        self.windDirection=0
+        self.windSpeed=0
+        self.symbol=""
+        self.rainAmount=""
+        self.next6hoursSymbol=""
+        self.next6hoursRainAmount=""
         self.updateWeather()
+
     def updateWeather(self):
         rawtext= requests.get(self.url,headers=self.headers).content
         self.setParameters(rawtext)
@@ -39,7 +40,7 @@ class weather():
 
     def getCurrentWeatherDict(self, WeatherForDay: list):
         hour=datetime.now().hour
-        if datetime.now().minute>30:
+        if datetime.now().minute>=30:
             hour+=1
         if hour<10:
             currentTime=f"{datetime.now().date()}T0{hour}:00:00Z"
