@@ -123,9 +123,9 @@ def ui(overskrift: str, underskrifter:list,startTid: datetime.datetime,vær: wea
                     "   "+guests.at(guest_i),
                     "   "+guests.at((guest_i + 1)),
                     "   "+guests.at((guest_i + 2)),
-                    "   "+guests.at((guest_i + 3))
-                    str((guest_i//4)+1)+" / "+str(ceil(guests.size()/3))
+                    "   "+guests.at((guest_i + 3)),
                 ]
+                sidetall = str((guest_i//4)+1)+" / "+str(ceil(guests.size()/3))
         
         if i % 100 == 0:
             current_news = str(nyheter)
