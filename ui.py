@@ -49,6 +49,7 @@ def ui(overskrift: str, underskrifter:list,startTid: datetime.datetime,vær: wea
     notoffwhite= (5,5,5)
     notblack= (255,255,255)
     notgray= (139,137,119)
+    
     white = (255, 255, 255)
     offwhite= (250,250,250)
     black= (0,0,0)
@@ -108,7 +109,7 @@ def ui(overskrift: str, underskrifter:list,startTid: datetime.datetime,vær: wea
     RectTemp.topleft=(RectWeather.left, Recttittel.bottom)
     RectSymbol.bottomleft=(RectTemp.right+marg,RectWeather.top)
     Rectnyhet.bottomleft=(marg,Recttime.bottom)
-    pygame.mouse.set_visible(FALSE)
+    pygame.mouse.set_visible(False)
     
     
     
