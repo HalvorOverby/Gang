@@ -17,11 +17,11 @@ class Surveilance:
         for line in output:
             if "netmask" in line:
                 x = [l for l in line.split(" ") if l]
-                print(x)
                 self.scan_IP = x[1]
+                break
             else:
                 self.scan_IP = "10.0.0.0"
-            print(self.scan_IP)
+                break
 
 
         self.submask = 24
