@@ -141,7 +141,7 @@ def ui(overskrift: str, underskrifter:list,startTid: datetime.datetime,vær: wea
         if update and (datetime.datetime.now().minute%refreshrate==0):
             print("Melding og vær oppdateres")
             vær.updateWeather()
-            nyheter.updateNews()
+            nyheter.update_news()
             if 5<datetime.datetime.now().hour<11:
                 overskrift="God Morgen"
                 vær.symbol=vær.next6hoursSymbol
