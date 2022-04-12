@@ -11,7 +11,6 @@ class news:
     def update_news(self):
         r = requests.get("http://nrk.no").text
         x = re.findall('data-ec-name="((?:\w|\d|\s|-)*)"', r)
-        x.remove("Se siste nytt")
         self.news = x
 
     def __str__(self):
