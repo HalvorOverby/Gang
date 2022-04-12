@@ -129,7 +129,7 @@ def ui(overskrift: str, underskrifter:list,startTid: datetime.datetime,vær: wea
         display_surface.blit(underoverskriftfont.render(underoverskrifter[3],True,gray,offwhite),Rectunderoverskrift4)
         display_surface.blit(underoverskriftfont.render(underoverskrifter[4],True,gray,offwhite),Rectunderoverskrift5)
         display_surface.blit(sidetallfont.render(sidetall_string,True,gray,offwhite),RectSidetall)
-        display_surface.blit(underoverskriftfont.render((current_news[:60]+"...") if len(current_news) > 63 else current_news ,True,gray,offwhite),Rectnyhet)
+        display_surface.blit(underoverskriftfont.render((current_news[:57]+"...") if len(current_news) > 60 else current_news ,True,gray,offwhite),Rectnyhet)
         display_surface.blit(underoverskriftfont.render(datetime.datetime.now().strftime("%H:%M"),True,gray,offwhite),Recttime)
         display_surface.blit(tittelfont.render(f"{round(vær.temp)}°", True,gray,offwhite ),RectTemp)
         display_surface.blit(underoverskriftfont.render(vær.weatherstatus(), True,gray,offwhite),RectWeather)
