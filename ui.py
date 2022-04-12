@@ -105,7 +105,7 @@ def ui(overskrift: str, underskrifter:list,startTid: datetime.datetime,vær: wea
 
     i = 0
     guest_i = 0
-    sidetall = ""
+    sidetall_string = ""
     while True:
     
         if i % 20 == 0:
@@ -119,7 +119,7 @@ def ui(overskrift: str, underskrifter:list,startTid: datetime.datetime,vær: wea
                     "   "+guests.at((guest_i + 2)),
                     "   "+guests.at((guest_i + 3)),
                 ]
-                sidetall = str((guest_i//4)+1)+" / "+str(ceil(guests.size()/3)) if guests.size() > 4 else ""
+                sidetall_string = str((guest_i//4)+1)+" / "+str(ceil(guests.size()/4)) if guests.size() > 4 else ""
 
         display_surface.fill(offwhite)
         display_surface.blit(tittelfont.render(overskrift, True, black, offwhite), Recttittel)
