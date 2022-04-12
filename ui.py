@@ -25,6 +25,7 @@ class GuestList:
 
 
 def ui(overskrift: str, underskrifter:list,startTid: datetime.datetime,vær: weather, nyheter: news):
+    pygame.mouse.set_visible(False)
     pygame.font.get_fonts()
     guests : GuestList = GuestList()
     surv = Surveilance()
@@ -99,6 +100,7 @@ def ui(overskrift: str, underskrifter:list,startTid: datetime.datetime,vær: wea
     RectTemp.topleft=(RectWeather.left, Recttittel.bottom)
     RectSymbol.bottomleft=(RectTemp.right+marg,RectWeather.top)
     Rectnyhet.bottomleft=(marg,Recttime.bottom)
+    
     
     
     
