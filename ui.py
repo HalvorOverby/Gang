@@ -161,13 +161,13 @@ def ui(overskrift: str, underskrifter:list,startTid: datetime.datetime,vær: wea
                 gray=trulygray
                 black=trulyblack
                 white=trulywhite
-            elif 11<=datetime.datetime.now().hour<17:
+            elif 11<=datetime.datetime.now().hour<18:
                 overskrift="God Dag"
                 offwhite=trulyoffwhite
                 gray=trulygray
                 black=trulyblack
                 white=trulywhite
-            elif 17<=datetime.datetime.now().hour<22:
+            elif 18<=datetime.datetime.now().hour<22:
                 overskift="God Kveld"
                 offwhite=notoffwhite
                 gray=notgray
