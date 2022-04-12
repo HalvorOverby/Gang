@@ -40,6 +40,14 @@ def ui(overskrift: str, underskrifter:list,startTid: datetime.datetime,vær: wea
     current_news = str(nyheter)
 
 
+    trulywhite = (255, 255, 255)
+    trulyoffwhite= (250,250,250)
+    trulyblack= (0,0,0)
+    trulygray= (116,118,136)
+    notwhite = (0, 0, 0)
+    notoffwhite= (5,5,5)
+    notblack= (255,255,255)
+    notgray= (139,137,119)
     white = (255, 255, 255)
     offwhite= (250,250,250)
     black= (0,0,0)
@@ -99,6 +107,7 @@ def ui(overskrift: str, underskrifter:list,startTid: datetime.datetime,vær: wea
     RectTemp.topleft=(RectWeather.left, Recttittel.bottom)
     RectSymbol.bottomleft=(RectTemp.right+marg,RectWeather.top)
     Rectnyhet.bottomleft=(marg,Recttime.bottom)
+    pygame.mouse.set_visible(FALSE)
     
     
     
@@ -145,12 +154,28 @@ def ui(overskrift: str, underskrifter:list,startTid: datetime.datetime,vær: wea
             if 5<datetime.datetime.now().hour<11:
                 overskrift="God Morgen"
                 vær.symbol=vær.next6hoursSymbol
+                offwhite=notoffwhite
+                gray=notgray
+                black=notblack
+                white=notwhite
             elif 11<=datetime.datetime.now().hour<18:
                 overskrift="God Dag"
+                offwhite=notoffwhite
+                gray=notgray
+                black=notblack
+                white=notwhite
             elif 18<=datetime.datetime.now().hour<22:
                 overskift="God Kveld"
+                offwhite=notoffwhite
+                gray=notgray
+                black=notblack
+                white=notwhite
             else:
                 overskift="God Natt"
+                offwhite=notoffwhite
+                gray=notgray
+                black=notblack
+                white=notwhite
             update=False
         if datetime.datetime.now().minute%refreshrate==1:
             update=True
