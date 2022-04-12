@@ -18,6 +18,8 @@ class Surveilance:
             if "netmask" in line:
                 x = [l for l in line.split(" ") if l]
                 self.scan_IP = x[1]
+            else:
+                self.scan_IP = "10.0.0.0"
 
 
         self.submask = 24
