@@ -154,17 +154,17 @@ def ui(overskrift: str, underskrifter:list,startTid: datetime.datetime,vær: wea
             if 5<datetime.datetime.now().hour<11:
                 overskrift="God Morgen"
                 vær.symbol=vær.next6hoursSymbol
-                offwhite=notoffwhite
-                gray=notgray
-                black=notblack
-                white=notwhite
-            elif 11<=datetime.datetime.now().hour<18:
+                offwhite=trulyoffwhite
+                gray=trulygray
+                black=trulyblack
+                white=trulywhite
+            elif 11<=datetime.datetime.now().hour<17:
                 overskrift="God Dag"
-                offwhite=notoffwhite
-                gray=notgray
-                black=notblack
-                white=notwhite
-            elif 18<=datetime.datetime.now().hour<22:
+                offwhite=trulyoffwhite
+                gray=trulygray
+                black=trulyblack
+                white=trulywhite
+            elif 17<=datetime.datetime.now().hour<22:
                 overskift="God Kveld"
                 offwhite=notoffwhite
                 gray=notgray
