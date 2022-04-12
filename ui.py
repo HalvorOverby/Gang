@@ -93,6 +93,7 @@ def ui(overskrift: str, underskrifter:list,startTid: datetime.datetime,vær: wea
     Rectunderoverskrift3.topleft = (2*marg,Rectunderoverskrift2.bottom+marg)
     Rectunderoverskrift4.topleft = (2*marg,Rectunderoverskrift3.bottom+marg)
     Rectunderoverskrift5.topleft = (2*marg,Rectunderoverskrift4.bottom+marg)
+    print(Rectunderoverskrift1.right)
     RectSidetall.topright=(max(Rectunderoverskrift1.right,Rectunderoverskrift2.right,Rectunderoverskrift3.right,Rectunderoverskrift4.right,Rectunderoverskrift5.right),Rectunderoverskrift5.bottom+marg)
     Recttime.bottomright=(X-marg*2,Y-marg)
     RectWeather.topright=(X-marg,Recttittel.bottom+largeFontSize+marg+3)
@@ -119,7 +120,7 @@ def ui(overskrift: str, underskrifter:list,startTid: datetime.datetime,vær: wea
                     "   "+guests.at((guest_i + 2)),
                     "   "+guests.at((guest_i + 3)),
                 ]
-                sidetall = str((guest_i//4)+1)+" / "+str(ceil(guests.size()/3))
+                sidetall = str((guest_i//4)+1)+" / "+str(ceil(guests.size()/3)) if guests.size() > 4 else ""
 
         display_surface.fill(offwhite)
         display_surface.blit(tittelfont.render(overskrift, True, black, offwhite), Recttittel)

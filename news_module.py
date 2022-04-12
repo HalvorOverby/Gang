@@ -16,5 +16,3 @@ class news:
     def __str__(self):
         self.i = (self.i + 1) % len(self.news)
         return "NRK: " + self.news[self.i]
-
-nyheter = news()
