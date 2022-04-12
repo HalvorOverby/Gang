@@ -14,13 +14,11 @@ class Surveilance:
         proc = subprocess.Popen(["ifconfig", "wlan0"], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
         o, e = proc.communicate()
         output = o.decode('ascii').split("\n")
+        self.scan_IP = "10.0.0.0"
         for line in output:
             if "netmask" in line:
                 x = [l for l in line.split(" ") if l]
                 self.scan_IP = x[1]
-                break
-            else:
-                self.scan_IP = "10.0.0.0"
                 break
 
 
