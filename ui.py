@@ -46,7 +46,7 @@ def ui(overskrift: str, underskrifter:list,startTid: datetime.datetime,vær: wea
     gray= (116,118,136)
     
     X = 1920   
-    Y = 1020
+    Y = 1080
 
 
     marg=(Y/80)
@@ -56,7 +56,7 @@ def ui(overskrift: str, underskrifter:list,startTid: datetime.datetime,vær: wea
 
 
     
-    display_surface = pygame.display.set_mode((X, Y))
+    display_surface = pygame.display.set_mode((X, Y),pygame.FULLSCREEN) 
     tittelfont = pygame.font.SysFont("poppins", largeFontSize)
     underoverskriftfont= pygame.font.SysFont("poppins",smallFontSize)
     sidetallfont=pygame.font.SysFont("poppins",pageFontSize)
